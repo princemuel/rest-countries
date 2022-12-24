@@ -6,11 +6,10 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import './assets/styles/main.css';
-import { Layout } from './components/layout';
+import { Layout } from './components';
 import { ThemeProvider } from './context';
-import Country from './routes/country';
-import Root from './routes/root';
+import { Country, Root } from './routes';
+import './styles/main.css';
 
 const container = document.getElementById('root') as HTMLElement;
 const root = createRoot(container);

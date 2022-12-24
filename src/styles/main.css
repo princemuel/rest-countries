@@ -1,0 +1,29 @@
+@tailwind base;
+@layer base {
+  html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+    text-rendering: optimizeSpeed;
+    text-size-adjust: none;
+  }
+  @media (min-width: 112.5em) {
+    html {
+      font-size: 75%;
+    }
+  }
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    box-sizing: inherit;
+  }
+
+  :where([hidden]:not([hidden='until-found'])) {
+    display: none !important;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;

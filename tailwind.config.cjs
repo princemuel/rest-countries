@@ -15,6 +15,22 @@ module.exports = {
     fontFamily: {
       sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
     },
+    colors: {
+      current: 'currentColor',
+      transparent: 'transparent',
+      inherit: 'inherit',
+      neutral: {
+        100: '#ffffff',
+        900: '#000000',
+      },
+      primary: {
+        100: '#fafafa',
+        200: '#858585',
+        300: '#111517',
+        400: '#202c37',
+        500: '#2b3945',
+      },
+    },
 
     screens: {
       s: '20em', // => @media (min-width: 320px) { ... }
@@ -45,5 +61,24 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.icon': {
+          fill: 'currentColor',
+        },
+        '.w-full-shadow': {
+          boxShadow: '0 0 0 100vmax currentColor, 0 0 2rem currentColor',
+          clipPath: 'inset(0 -100vmax)',
+        },
+        '.h-container': {
+          '--max-width': '111rem',
+          '--container-padding': '2rem',
+
+          width: 'min(var(--max-width), 100% - (var(--container-padding) * 2))',
+          marginInline: 'auto',
+        },
+      });
+    }),
+  ],
 };

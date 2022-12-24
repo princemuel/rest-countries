@@ -37,9 +37,11 @@ module.exports = {
         // etc.
       },
       boxShadow: {
-        100: '0px 10px 10px -10px rgba(72, 84, 159, 0.100397)',
-        200: '0px 10px 20px rgba(72, 84, 159, 0.25);',
-        300: '0px 10px 20px rgba(0, 0, 0, 0.25)',
+        header: '0px 2px 4px rgba(0, 0, 0, 0.0562443)',
+        card: '0px 0px 7px 2px rgba(0, 0, 0, 0.0294384)',
+        input: '0px 2px 9px rgba(0, 0, 0, 0.0532439)',
+        pill: '0px 0px 4px 1px rgba(0, 0, 0, 0.104931)',
+        back: '0px 0px 7px rgba(0, 0, 0, 0.293139)',
       },
     },
   },

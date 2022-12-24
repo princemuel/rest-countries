@@ -1,10 +1,14 @@
 type Props = {};
 
 const Root = (props: Props) => {
-  return <div>Root</div>;
+  return (
+    <main className='text-[1.4rem]'>
+      <section className='h-container'></section>
+    </main>
+  );
 };
 
-export default Root;
+export { Root };
 
 export function rootLoader() {
   return;

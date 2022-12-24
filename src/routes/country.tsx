@@ -1,10 +1,14 @@
 type Props = {};
 
 const Country = (props: Props) => {
-  return <div>Country</div>;
+  return (
+    <main className='text-[1.6rem]'>
+      <section className='h-container'></section>
+    </main>
+  );
 };
 
-export default Country;
+export { Country };
 
 export function countryLoader() {
   return;

@@ -27,11 +27,10 @@ module.exports = {
         100: '#fafafa',
         200: '#858585',
         300: '#111517',
-        400: '#202c37',
-        500: '#2b3945',
+        400: '#202c36',
+        500: '#2b3844',
       },
     },
-
     screens: {
       s: '20em', // => @media (min-width: 320px) { ... }
       xs: '30em', // => @media (min-width: 480px) { ... }
@@ -72,7 +71,7 @@ module.exports = {
           clipPath: 'inset(0 -100vmax)',
         },
         '.h-container': {
-          '--max-width': '111rem',
+          '--max-width': '128rem',
           '--container-padding': '2rem',
 
           width: 'min(var(--max-width), 100% - (var(--container-padding) * 2))',

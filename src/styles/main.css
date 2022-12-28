@@ -23,6 +23,28 @@
   :where([hidden]:not([hidden='until-found'])) {
     display: none !important;
   }
+
+  :where(body) {
+    /* Changed to min- to prevent cropping */
+    /* min-height: 100%; */
+    min-block-size: 100vh;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    position: relative;
+  }
+
+  :where(:focus-visible) {
+    outline: 2px solid var(--focus-color, Highlight);
+    outline-offset: 2px;
+  }
+
+  /* *********** TYPOGRAPHY  ************* */
+  :where(body) {
+    @apply bg-primary-100 text-primary-300 dark:bg-primary-400 dark:text-neutral-100;
+  }
 }
 
 @tailwind components;

@@ -38,8 +38,8 @@ export const removeFirstChar = (string: string) => {
   return string?.slice(1);
 };
 
-export const isNotEmptyArray = <T>(
-  array: T[] | undefined
+export const hasValues = <T>(
+  array: T[] | undefined | null
 ): array is NonNullable<T[]> => {
   return (array || []).length > 0;
 };

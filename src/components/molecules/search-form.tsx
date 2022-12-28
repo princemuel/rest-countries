@@ -1,5 +1,5 @@
+import { ReactInputEvent } from '../../@types';
 import { useCountriesDispatch, useTheme } from '../../context';
-import { ReactInputEvent } from '../../types';
 
 type Props = {};
 
@@ -25,7 +25,7 @@ const SearchForm = (props: Props) => {
       <input
         type='text'
         id='search'
-        className='w-full border-none outline-none'
+        className='w-full border-none bg-neutral-100 outline-none dark:bg-primary-500'
         aria-label='Search for a country…'
         placeholder='Search for a country…'
         onChange={handleSearch}

@@ -20,7 +20,7 @@ const ThemeBtn = ({ classname }: Props) => {
       )}
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
-      <img src={`/assets/${url}.svg`} alt={theme} />
+      <img src={`/assets/${url}.svg`} alt={theme} aria-hidden />
       <Text>{theme} mode</Text>
     </button>
   );

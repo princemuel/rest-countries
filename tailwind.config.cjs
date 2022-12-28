@@ -44,13 +44,6 @@ module.exports = {
     },
 
     extend: {
-      gridTemplateColumns: {
-        // arbitrary values
-        'fill-16': 'repeat(auto-fill, minmax(4rem, 1fr))',
-        'fill-20': 'repeat(auto-fill, minmax(5rem, 1fr))',
-        'fit-big': 'repeat(auto-fit, minmax(25rem, 1fr))',
-        // etc.
-      },
       boxShadow: {
         header: '0px 2px 4px rgba(0, 0, 0, 0.0562443)',
         card: '0px 0px 7px 2px rgba(0, 0, 0, 0.0294384)',

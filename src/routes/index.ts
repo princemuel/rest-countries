@@ -1,2 +1,3 @@
+export * from './404';
 export * from './country';
-export * from './root';
+export * from './home';

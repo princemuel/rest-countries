@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
-import { Filters } from '../organisms';
-import CountriesList from '../organisms/countries';
+import { CountriesList, Filters } from '../organisms';
 
 type Props = {};
 

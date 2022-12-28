@@ -2,8 +2,8 @@ import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from './components';
-import { ThemeProvider } from './context';
-import { Country, countryLoader, ErrorPage, Root, rootLoader } from './routes';
+import { CountriesProvider, ThemeProvider } from './context';
+import { Country, countryLoader, ErrorPage, Home } from './routes';
 import './styles/main.css';
 
 const container = document.getElementById('root') as HTMLElement;
@@ -17,8 +17,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Root />,
-        loader: rootLoader,
+        element: <Home />,
+        // loader: homeLoader,
       },
       {
         path: 'countries/:countryId',
@@ -32,7 +32,9 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <CountriesProvider>
+        <RouterProvider router={router} />
+      </CountriesProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

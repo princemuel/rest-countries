@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ICountry } from '../../lib';
+import type { ICountry } from '../../@types';
 import { Text } from '../atoms';
 
 type Props = {

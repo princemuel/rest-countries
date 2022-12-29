@@ -59,7 +59,11 @@ const FilterForm = (props: Props) => {
           {hasValues(regions)
             ? regions.map((region) => {
                 return (
-                  <li key={region} onClick={handleFilter}>
+                  <li
+                    key={region}
+                    onClick={handleFilter}
+                    className='cursor-pointer'
+                  >
                     {region}
                   </li>
                 );

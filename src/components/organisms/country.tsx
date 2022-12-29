@@ -16,113 +16,86 @@ const CountryDetails = ({ country, borders }: Props) => {
   const languages = country?.languages;
 
   return (
-    <div className='flex flex-col gap-20 md:flex-row'>
-      <figure className='overflow-hidden rounded-xl shadow-md'>
+    <div className='flex flex-col gap-20 lg:flex-row lg:gap-40'>
+      <figure className='w-full overflow-hidden shadow-md lg:w-2/5'>
         <img
           src={country?.flags?.svg}
           alt={country?.name}
-          className='object-cover'
+          className='rounded-xl object-cover shadow-md'
         />
       </figure>
 
-      <div className='flex flex-col gap-20'>
+      <div className='flex w-full flex-col gap-20 lg:w-3/5 lg:self-center'>
         <Text
           as='h3'
           id='country-name'
-          className='text-[1.8rem] font-extrabold leading-[2.6rem]'
+          className='text-3xl font-extrabold lg:text-5xl'
         >
           {country?.name}
         </Text>
 
-        <div className='flex flex-col gap-6'>
-          <Text className='flex items-center gap-2 leading-[1.6rem]'>
-            <Text as='span' className='font-semibold'>
-              Native Name:
+        <div className='flex flex-col items-start gap-12 lg:flex-row lg:gap-28 xl:gap-40'>
+          <div className='space-y-6'>
+            <Text className='flex items-center gap-2 leading-[1.6rem]'>
+              <span className='font-semibold'>Native Name:</span>
+              <span className='font-light'>{country?.nativeName}</span>
             </Text>
-            <Text as='span' className='font-light'>
-              {country?.nativeName}
+            <Text className='flex items-center gap-2 leading-[1.6rem]'>
+              <span className='font-semibold'>Population:</span>
+              <span className='font-light'>
+                {(country?.population).toLocaleString('en-US')}
+              </span>
             </Text>
-          </Text>
-          <Text className='flex items-center gap-2 leading-[1.6rem]'>
-            <Text as='span' className='font-semibold'>
-              Population:
+            <Text className='flex items-center gap-2 leading-[1.6rem]'>
+              <span className='font-semibold'>Region:</span>
+              <span className='font-light'>{country?.region}</span>
             </Text>
-            <Text as='span' className='font-light'>
-              {(country?.population).toLocaleString('en-US')}
+            <Text className='flex items-center gap-2 leading-[1.6rem]'>
+              <span className='font-semibold'>Sub Region:</span>
+              <span className='font-light'>{country?.subregion}</span>
             </Text>
-          </Text>
-          <Text className='flex items-center gap-2 leading-[1.6rem]'>
-            <Text as='span' className='font-semibold'>
-              Region:
+            <Text className='flex items-center gap-2 leading-[1.6rem]'>
+              <span className='font-semibold'>Capital:</span>
+              <span className='font-light'>{country?.capital || 'None'}</span>
             </Text>
-            <Text as='span' className='font-light'>
-              {country?.region}
-            </Text>
-          </Text>
-          <Text className='flex items-center gap-2 leading-[1.6rem]'>
-            <Text as='span' className='font-semibold'>
-              Sub Region:
-            </Text>
-            <Text as='span' className='font-light'>
-              {country?.subregion}
-            </Text>
-          </Text>
-          <Text className='flex items-center gap-2 leading-[1.6rem]'>
-            <Text as='span' className='font-semibold'>
-              Capital:
-            </Text>
-            <Text as='span' className='font-light'>
-              {country?.capital || 'None'}
-            </Text>
-          </Text>
-        </div>
+          </div>
 
-        <div className='flex flex-col gap-6'>
-          <Text className='flex items-center gap-2 leading-[1.6rem]'>
-            <Text as='span' className='font-semibold'>
-              Top Level Domain:
+          <div className='flex flex-col gap-6'>
+            <Text className='flex items-center gap-2 leading-[1.6rem]'>
+              <span className='font-semibold'>Top Level Domain:</span>
+              <span className='font-light'>{country?.topLevelDomain[0]}</span>
             </Text>
-            <Text as='span' className='font-light'>
-              {country?.topLevelDomain[0]}
+            <Text className='flex items-center gap-2 leading-[1.6rem]'>
+              <span className='font-semibold'>Currencies:</span>
+              {hasValues(currencies) ? (
+                currencies?.map((currency) => {
+                  return (
+                    <Text key={currency?.code} as='span' className='font-light'>
+                      {currency.name}
+                    </Text>
+                  );
+                })
+              ) : (
+                <span className='font-light'>None</span>
+              )}
             </Text>
-          </Text>
-          <Text className='flex items-center gap-2 leading-[1.6rem]'>
-            <Text as='span' className='font-semibold'>
-              Currencies:
+            <Text className='flex items-center gap-2 leading-[1.6rem]'>
+              <span className='font-semibold'>Languages:</span>
+              <span className='font-light'>
+                {hasValues(languages)
+                  ? languages.map(({ name }) => name).join(', ')
+                  : 'None'}
+              </span>
             </Text>
-            {hasValues(currencies) ? (
-              currencies?.map((currency) => {
-                return (
-                  <Text key={currency?.code} as='span' className='font-light'>
-                    {currency.name}
-                  </Text>
-                );
-              })
-            ) : (
-              <Text as='span' className='font-light'>
-                None
-              </Text>
-            )}
-          </Text>
-
-          <Text className='flex items-center gap-2 leading-[1.6rem]'>
-            <Text as='span' className='font-semibold'>
-              Languages:
-            </Text>
-            <Text as='span' className='font-light'>
-              {hasValues(languages)
-                ? languages.map(({ name }) => name).join(', ')
-                : 'None'}
-            </Text>
-          </Text>
+          </div>
         </div>
 
         <div className='flex flex-col gap-8'>
-          <Text as='span' className='font-semibold leading-[1.6rem]'>
+          <span className='font-semibold leading-[1.6rem]'>
             Border Countries:
-          </Text>
+          </span>
 
-          <div className='flex flex-wrap items-end gap-4'>
+          <div className='inline-flex flex-wrap items-end gap-4'>
             {hasValues(borders) ? (
               borders.map((border) => {
                 return (
@@ -136,9 +109,7 @@ const CountryDetails = ({ country, borders }: Props) => {
                 );
               })
             ) : (
-              <Text as='span' className='font-light'>
-                None
-              </Text>
+              <span className='font-light'>None</span>
             )}
           </div>
         </div>

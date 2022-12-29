@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
 import { RouterProvider } from 'react-router-dom';
 import { CountriesProvider, ThemeProvider } from './context';
 import { router } from './routes';
@@ -10,10 +11,12 @@ const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <CountriesProvider>
-        <RouterProvider router={router} />
-      </CountriesProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <CountriesProvider>
+          <RouterProvider router={router} />
+        </CountriesProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   </React.StrictMode>
 );

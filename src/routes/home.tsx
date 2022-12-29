@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { HomeTemplate } from '../components';
 import { getCountries, getRegions } from '../lib';
 
@@ -5,9 +7,24 @@ type Props = {};
 
 const Home = (props: Props) => {
   return (
-    <main className='text-[1.4rem]'>
-      <HomeTemplate />
-    </main>
+    <Fragment>
+      <Helmet>
+        <meta property='og:title' content='Countries of the World' />
+        <title>Countries of the World</title>
+        <meta
+          name='og:description'
+          content='An appplication displaying a list of all countries in the world and relevant details about them'
+        />
+        <meta
+          name='description'
+          content='An appplication displaying a list of all countries in the world and relevant details about them'
+        />
+      </Helmet>
+
+      <main className='text-[1.4rem]'>
+        <HomeTemplate />
+      </main>
+    </Fragment>
   );
 };
 

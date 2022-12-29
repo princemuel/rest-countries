@@ -16,6 +16,8 @@ This project integrates with the [REST Countries API](https://restcountries.com)
     - [Links](#links)
   - [My process](#my-process)
     - [Built with](#built-with)
+    - [What I learned](#what-i-learned)
+  - [Author](#author)
 
 ## Overview
 
@@ -48,3 +50,12 @@ Users should be able to:
 - [React](https://beta.reactjs.org/) - A JavaScript library for building user interfaces
 - [Vite.js](https://vitejs.dev/guide/) - An Fast and Opinionated Code Bundler for JavaScript
 - [Tailwind CSS](https://tailwindcss.com/docs/installation) - A Utility-first CSS framework
+
+### What I learned
+
+## Author
+
+- Website - [Prince Muel](https://princemuel.vercel.app)
+- Twitter - [@iamprincemuel](https://www.twitter.com/iamprincemuel)
+- LinkedIn - [@princemuel](https://www.linkedin.com/in/princemuel)
+- Discord - [@princemuel](https://discordapp.com/users/princemuel#3896)

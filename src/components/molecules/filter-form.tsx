@@ -16,6 +16,7 @@ const FilterForm = (props: Props) => {
   const dispatch = useCountriesDispatch();
 
   const [showDropdown, setShowDropdown] = useState(false);
+  const [filterValue, setFilterValue] = useState('');
   const ref = useRef<HTMLUListElement>(null);
 
   useClickOutside(ref, () => {
@@ -26,6 +27,7 @@ const FilterForm = (props: Props) => {
   const url = theme === 'light' ? 'light' : 'dark';
 
   function handleFilter(e: ReactSelectEvent) {
+    setFilterValue(e.currentTarget.textContent!);
     dispatch({ type: 'FILTER', payload: e.currentTarget.textContent! });
   }
 
@@ -41,7 +43,7 @@ const FilterForm = (props: Props) => {
           aria-controls='regions'
           onClick={() => setShowDropdown((prev) => !prev)}
         >
-          <span>Filter by Region</span>
+          <span>{filterValue || 'Filter by Region'}</span>
           <img
             src={`/assets/expand-${url}.svg`}
             alt={'click to select region'}
@@ -55,7 +57,9 @@ const FilterForm = (props: Props) => {
           className='absolute left-0 z-10 mt-8 w-full scale-y-0 space-y-4 rounded-lg bg-neutral-100 px-8 py-6 shadow-input transition-all duration-500 aria-expanded:scale-100 dark:bg-primary-500'
           aria-expanded={showDropdown}
         >
-          <li onClick={handleFilter}>All</li>
+          <li onClick={handleFilter} className='cursor-pointer'>
+            All
+          </li>
           {hasValues(regions)
             ? regions.map((region) => {
                 return (

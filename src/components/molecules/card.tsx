@@ -23,7 +23,7 @@ const Card = ({ country }: Props) => {
 
         <div className='flex-1 bg-neutral-100 py-8 px-10 dark:bg-primary-500'>
           <Text
-            as='h3'
+            variant='h3'
             className='mt-4 mb-6 text-[1.8rem] font-extrabold leading-[2.6rem]'
           >
             {country?.name}
@@ -31,28 +31,28 @@ const Card = ({ country }: Props) => {
 
           <div className='> * + * space-y-4'>
             <Text className='flex items-center gap-2 leading-[1.6rem]'>
-              <Text as='span' className='font-semibold'>
+              <Text variant='span' className='font-semibold'>
                 Population:
               </Text>
-              <Text as='span' className='font-light'>
+              <Text variant='span' className='font-light'>
                 {(country?.population).toLocaleString('en-US')}
               </Text>
             </Text>
 
             <Text className='flex items-center gap-2 leading-[1.6rem]'>
-              <Text as='span' className='font-semibold'>
+              <Text variant='span' className='font-semibold'>
                 Region:
               </Text>
-              <Text as='span' className='font-light'>
+              <Text variant='span' className='font-light'>
                 {country?.region}
               </Text>
             </Text>
 
             <Text className='flex items-center gap-2 leading-[1.6rem]'>
-              <Text as='span' className='font-semibold'>
+              <Text variant='span' className='font-semibold'>
                 Capital:
               </Text>
-              <Text as='span' className='font-light'>
+              <Text variant='span' className='font-light'>
                 {country?.capital || ''}
               </Text>
             </Text>

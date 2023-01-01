@@ -7,7 +7,7 @@ const ErrorPageTemplate = (props: Props) => {
   return (
     <div>
       <div>
-        <Text as='h1'>404</Text>
+        <Text variant='h1'>404</Text>
         <p>
           {/* @ts-expect-error */}
           <i>{error?.statusText || error?.message}</i>
@@ -22,7 +22,7 @@ const ErrorPageTemplate = (props: Props) => {
           <Link to='/'>Homepage</Link>
           &nbsp;or another page using the navigation menu
         </Text>
-        <Text as='strong'>
+        <Text variant='strong'>
           (It will go back to the previous page after 10 seconds)
         </Text>
       </div>

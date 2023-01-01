@@ -27,7 +27,7 @@ const CountryDetails = ({ country, borders }: Props) => {
 
       <div className='flex w-full flex-col gap-20 lg:w-3/5 lg:self-center'>
         <Text
-          as='h3'
+          variant='h3'
           id='country-name'
           className='text-3xl font-extrabold lg:text-5xl'
         >
@@ -70,7 +70,11 @@ const CountryDetails = ({ country, borders }: Props) => {
               {hasValues(currencies) ? (
                 currencies?.map((currency) => {
                   return (
-                    <Text key={currency?.code} as='span' className='font-light'>
+                    <Text
+                      key={currency?.code}
+                      variant='span'
+                      className='font-light'
+                    >
                       {currency.name}
                     </Text>
                   );

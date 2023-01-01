@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useRef } from 'react';
-import { off, on } from '../utils';
+import { addEventListener, removeEventListener } from '../utils';
 
 const defaultEvents = ['mousedown', 'touchstart'];
 
@@ -20,11 +20,11 @@ const useClickOutside = <E extends Event = Event>(
       el && !el.contains(event.target) && savedCallback.current(event);
     };
     for (const eventName of events) {
-      on(document, eventName, handler);
+      addEventListener(document, eventName, handler);
     }
     return () => {
       for (const eventName of events) {
-        off(document, eventName, handler);
+        removeEventListener(document, eventName, handler);
       }
     };
   }, [events, ref]);

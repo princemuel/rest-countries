@@ -1,12 +1,18 @@
 import * as React from 'react';
+import { ContextFactory } from './context-factory';
+import { ContextKeys } from './context-keys';
 
 type ThemeMode = 'dark' | 'light';
 type IThemeContext = ReturnType<typeof useDarkMode>[0] | null;
 type ISetThemeContext = ReturnType<typeof useDarkMode>[1] | null;
 
-const ThemeContext = React.createContext<IThemeContext>(null);
-const SetThemeContext = React.createContext<ISetThemeContext>(null);
+const ThemeContext = ContextFactory.createContext<IThemeContext>(
+  ContextKeys.THEMESTATE
+);
 
+const SetThemeContext = ContextFactory.createContext<ISetThemeContext>(
+  ContextKeys.THEMEDISPATCH
+);
 type Props = {
   children: React.ReactNode;
 };
@@ -26,22 +32,11 @@ const ThemeProvider = ({ children }: Props) => {
   );
 };
 
-const useTheme = () => {
-  const context = React.useContext(ThemeContext);
-  if (context == undefined) {
-    throw new Error('useTheme must be used in a ThemeProvider');
-  }
-  return context;
-};
+const useTheme = () =>
+  ContextFactory.useContext<IThemeContext>(ContextKeys.THEMESTATE);
 
-const useSetTheme = () => {
-  const context = React.useContext(SetThemeContext);
-  if (context == undefined) {
-    throw new Error('useSetTheme must be used in a ThemeProvider');
-  }
-
-  return context;
-};
+const useSetTheme = () =>
+  ContextFactory.useContext<ISetThemeContext>(ContextKeys.THEMEDISPATCH);
 
 // only these 3 exported functions below are for app usage
 export { useTheme, useSetTheme, ThemeProvider };

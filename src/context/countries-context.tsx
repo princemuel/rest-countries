@@ -1,13 +1,8 @@
-import {
-  createContext,
-  Dispatch,
-  ReactNode,
-  useContext,
-  useEffect,
-  useReducer,
-} from 'react';
+import { Dispatch, ReactNode, useEffect, useReducer } from 'react';
 import { ICountry } from '../@types';
 import { getCountries, getRegions } from '../lib';
+import { ContextFactory } from './context-factory';
+import { ContextKeys } from './context-keys';
 
 interface IState {
   countries: ICountry[];
@@ -24,8 +19,13 @@ type IActions =
   | { type: 'SEARCH'; payload: string }
   | { type: 'FILTER'; payload: string };
 
-const CountriesContext = createContext<IState | null>(null);
-const CountriesDispatch = createContext<Dispatch<IActions> | null>(null);
+const CountriesContext = ContextFactory.createContext<IState>(
+  ContextKeys.COUNTRIESSTATE
+);
+
+const CountriesDispatch = ContextFactory.createContext<Dispatch<IActions>>(
+  ContextKeys.COUNTRIESDISPATCH
+);
 
 const initialState: IState = {
   countries: [],
@@ -69,23 +69,11 @@ export const CountriesProvider = ({ children }: ProviderProps) => {
   );
 };
 
-export const useCountriesState = () => {
-  const context = useContext(CountriesContext);
-  if (context == undefined)
-    throw new Error(
-      'useCountriesState must be used within a CountriesProvider'
-    );
-  return context;
-};
+export const useCountriesState = () =>
+  ContextFactory.useContext<IState>(ContextKeys.COUNTRIESSTATE);
 
-export const useCountriesDispatch = () => {
-  const context = useContext(CountriesDispatch);
-  if (context == undefined)
-    throw new Error(
-      'useCountriesDispatch must be used within a CountriesProvider'
-    );
-  return context;
-};
+export const useCountriesDispatch = () =>
+  ContextFactory.useContext<Dispatch<IActions>>(ContextKeys.COUNTRIESDISPATCH);
 
 const reducer = (state: IState, action: IActions) => {
   switch (action.type) {

@@ -5,7 +5,6 @@ import {
   useCountriesState,
   useTheme,
 } from '../../context';
-import { useClickOutside } from '../../hooks';
 import { clsx, hasValues } from '../../utils';
 
 type Props = {};
@@ -17,11 +16,8 @@ const FilterForm = (props: Props) => {
 
   const [showDropdown, setShowDropdown] = useState(false);
   const [filterValue, setFilterValue] = useState('');
-  const ref = useRef<HTMLUListElement>(null);
 
-  useClickOutside(ref, () => {
-    setShowDropdown(false);
-  });
+  const ref = useRef<HTMLUListElement>(null);
 
   const regions = state?.regions;
   const url = theme === 'light' ? 'light' : 'dark';
@@ -29,7 +25,10 @@ const FilterForm = (props: Props) => {
   function handleFilter(e: ReactSelectEvent) {
     setFilterValue(e.currentTarget.textContent!);
     dispatch({ type: 'FILTER', payload: e.currentTarget.textContent! });
+    setShowDropdown(false);
   }
+
+  // useClickOutside(ref, closeDropdown, ['mousedown']);
 
   return (
     <form className='w-4/5 max-w-xs shadow-input'>
@@ -37,8 +36,7 @@ const FilterForm = (props: Props) => {
         <button
           type='button'
           className={clsx(
-            `peer inline-flex  w-full items-center justify-between text-[1.4rem] leading-8 text-primary-300 dark:text-neutral-100`,
-            showDropdown && 'is-shown'
+            `peer inline-flex  w-full items-center justify-between text-[1.4rem] leading-8 text-primary-300 dark:text-neutral-100`
           )}
           aria-controls='regions'
           onClick={() => setShowDropdown((prev) => !prev)}

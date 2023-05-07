@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from './header';
+import { Header } from '../organisms';
 
-type Props = {};
+interface Props {}
 
 const Layout = (props: Props) => {
   return (

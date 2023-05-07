@@ -7,8 +7,6 @@ export function memoize(this: any, func: Function) {
 
     let result = func.apply(this, args);
     cache.set(key, result);
-    console.log('CACHE', cache.keys());
-
     return result;
   };
 }

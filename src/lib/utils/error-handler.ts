@@ -1,6 +1,6 @@
-type ErrorWithMessage = {
+interface ErrorWithMessage {
   message: string;
-};
+}
 
 function isErrorWithMessage(error: unknown): error is ErrorWithMessage {
   return (

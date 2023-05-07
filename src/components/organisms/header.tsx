@@ -1,6 +1,6 @@
 import { Text, ThemeBtn } from '../atoms';
 
-type Props = {};
+interface Props {}
 
 const Header = (props: Props) => {
   return (

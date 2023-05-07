@@ -1,7 +1,7 @@
 import { ReactInputEvent } from '../../@types';
-import { useCountriesDispatch, useTheme } from '../../context';
+import { useCountriesDispatch, useTheme } from '../../lib';
 
-type Props = {};
+interface Props {}
 
 const SearchForm = (props: Props) => {
   const theme = useTheme();

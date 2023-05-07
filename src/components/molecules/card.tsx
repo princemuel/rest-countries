@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import type { ICountry } from '../../@types';
 import { Text } from '../atoms';
 
-type Props = {
+interface Props {
   country: ICountry;
-};
+}
 
 const Card = ({ country }: Props) => {
   return (

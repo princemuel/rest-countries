@@ -1,13 +1,14 @@
+import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { ReactSelectEvent } from '../../@types';
 import {
+  hasValues,
   useCountriesDispatch,
   useCountriesState,
   useTheme,
-} from '../../context';
-import { clsx, hasValues } from '../../utils';
+} from '../../lib';
 
-type Props = {};
+interface Props {}
 
 const FilterForm = (props: Props) => {
   const theme = useTheme();

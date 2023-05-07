@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import { ICountry } from '../@types';
 import { CountryTemplate } from '../components';
-import { cachedFetch } from '../lib';
+import { fetcher } from '../lib';
 import { hasValues } from '../lib/utils';
 
 type Props = {};
@@ -27,13 +27,13 @@ export { loader as countryLoader };
 
 // @ts-expect-error
 async function loader({ params }) {
-  const response = await cachedFetch(`/alpha/${params?.countryId}`);
+  const response = await fetcher(`/alpha/${params?.countryId}`);
   const country = response.data as ICountry;
   const codes = country.borders;
   const borders = hasValues(codes)
     ? await Promise.all(
         codes?.map(async (code) => {
-          const response = await cachedFetch(`/alpha/${code}`);
+          const response = await fetcher(`/alpha/${code}`);
           const data = response.data as ICountry;
           return { name: data.name, code: data.alpha3Code };
         }) || []

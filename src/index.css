@@ -26,8 +26,8 @@
 
   :where(body) {
     /* Changed to min- to prevent cropping */
-    /* min-height: 100%; */
-    min-block-size: 100vh;
+    min-height: 100%;
+    /* min-block-size: 100vh; */
     line-height: 1.5;
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;

@@ -1,5 +1,5 @@
 import { ICountry } from '../@types';
-import { cachedFetch } from './cached-fetch';
+import { cachedFetch } from './client';
 
 export async function getCountries() {
   const response = await cachedFetch(

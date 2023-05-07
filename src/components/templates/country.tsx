@@ -3,13 +3,13 @@ import { ICountry } from '../../@types';
 import { BackBtn } from '../atoms';
 import { CountryDetails } from '../organisms';
 
-type Props = {
+interface Props {
   country: ICountry;
   borders: {
     name: string;
     code: string;
   }[];
-};
+}
 
 const CountryTemplate = ({ country, borders }: Props) => {
   return (

@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { CountriesList, Filters } from '../organisms';
 
-type Props = {};
+interface Props {}
 
 const HomeTemplate = (props: Props) => {
   return (

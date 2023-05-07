@@ -1,17 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Text } from '../atoms';
 
-type Props = {};
+interface Props {}
 
 const ErrorPageTemplate = (props: Props) => {
   return (
     <div>
       <div>
         <Text variant='h1'>404</Text>
-        <p>
-          {/* @ts-expect-error */}
-          <i>{error?.statusText || error?.message}</i>
-        </p>
+        <p>{/* <i>{error?.statusText || error?.message}</i> */}</p>
         <Text>Page not found!</Text>
         <Text>
           This page is away on a vacation to Hawaii enjoying a coconut drink on

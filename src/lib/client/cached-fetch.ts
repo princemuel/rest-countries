@@ -2,7 +2,7 @@ import { client } from '.';
 import { memoize } from '../utils/cache';
 import { getErrorMessage } from '../utils/error-handler';
 
-export const fetcher = async (url: string) => {
+export const fetcher = memoize(async (url: string) => {
   return await client
     .get(url)
     .then((res) => ({
@@ -27,6 +27,4 @@ export const fetcher = async (url: string) => {
       }
       console.log(error.config);
     });
-};
-
-export const cachedFetch = memoize(fetcher);
+});

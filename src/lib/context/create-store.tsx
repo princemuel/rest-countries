@@ -1,12 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useCallback,
-  useContext,
-  useMemo,
-  useRef,
-  useSyncExternalStore,
-} from 'react';
+import * as React from 'react';
 import { capitalize } from '../utils';
 
 export function createStore<State>(initial: State, prefix: string) {
@@ -18,20 +10,20 @@ export function createStore<State>(initial: State, prefix: string) {
   type HasNoReturnValue = () => void;
 
   function useStoreFactory(): StoreFactory {
-    const store = useRef(initial);
+    const store = React.useRef(initial);
 
-    const get = useCallback(() => {
+    const get = React.useCallback(() => {
       return store?.current;
     }, []);
 
-    const subscribers = useRef(new Set<HasNoReturnValue>());
+    const subscribers = React.useRef(new Set<HasNoReturnValue>());
 
-    const set = useCallback((value: Partial<State>) => {
+    const set = React.useCallback((value: Partial<State>) => {
       store.current = { ...store?.current, ...value };
       subscribers?.current?.forEach((callback) => callback());
     }, []);
 
-    const subscribe = useCallback((callback: HasNoReturnValue) => {
+    const subscribe = React.useCallback((callback: HasNoReturnValue) => {
       subscribers?.current?.add(callback);
       return () => subscribers?.current?.delete(callback);
     }, []);
@@ -49,22 +41,22 @@ export function createStore<State>(initial: State, prefix: string) {
 
   const STORE_NAME = capitalize(prefix || 'Store');
 
-  const Store = createContext<StoreType | null>(null);
-  const StoreSetter = createContext<StoreSetterType | null>(null);
-  const StoreSubscriber = createContext<StoreSubscriberType | null>(null);
+  const Store = React.createContext<StoreType | null>(null);
+  const StoreSetter = React.createContext<StoreSetterType | null>(null);
+  const StoreSubscriber = React.createContext<StoreSubscriberType | null>(null);
 
   Store.displayName = STORE_NAME + 'Context';
 
-  type Props = {
-    children: ReactNode;
-  };
+  interface Props {
+    children: React.ReactNode;
+  }
 
   const StoreProvider = ({ children }: Props) => {
     const { get, set, subscribe } = useStoreFactory();
 
-    const memoizedGetter = useMemo(() => get, [get]);
-    const memoizedSetter = useMemo(() => set, [set]);
-    const memoizedSubscriber = useMemo(() => subscribe, [subscribe]);
+    const memoizedGetter = React.useMemo(() => get, [get]);
+    const memoizedSetter = React.useMemo(() => set, [set]);
+    const memoizedSubscriber = React.useMemo(() => subscribe, [subscribe]);
 
     return (
       <Store.Provider value={memoizedGetter}>
@@ -80,15 +72,15 @@ export function createStore<State>(initial: State, prefix: string) {
   function useStore<T>(
     selector: (store: State) => T
   ): [T, (value: Partial<State>) => void] {
-    const get = useContext(Store);
-    const set = useContext(StoreSetter);
-    const subscribe = useContext(StoreSubscriber);
+    const get = React.useContext(Store);
+    const set = React.useContext(StoreSetter);
+    const subscribe = React.useContext(StoreSubscriber);
 
     if (get == null || subscribe == null || set == null)
       throw new Error(
         `use${STORE_NAME}Store must be used in a ${STORE_NAME}Provider`
       );
-    const state = useSyncExternalStore(
+    const state = React.useSyncExternalStore(
       subscribe,
       () => selector(get()),
       () => selector(get())

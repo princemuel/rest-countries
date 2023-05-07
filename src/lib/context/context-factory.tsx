@@ -20,7 +20,9 @@ export const ContextFactory = {
 
     const context = React.useContext<T | null>(contextValue);
     if (context == null)
-      throw new Error(`Please use ${ContextKeys[key]} within its' Provider`);
+      throw new ReferenceError(
+        `Please use ${ContextKeys[key]} within its' Provider`
+      );
     return context;
   },
 

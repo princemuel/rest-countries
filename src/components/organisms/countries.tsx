@@ -1,7 +1,7 @@
-import { useCountriesState } from '../../context';
+import { useCountriesState } from '../../lib';
 import { Card } from '../molecules';
 
-type Props = {};
+interface Props {}
 
 const CountriesList = (props: Props) => {
   const state = useCountriesState();

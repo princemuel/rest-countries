@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useTheme } from '../../context';
+import { useTheme } from '../../lib';
 
 type Props = {};
 

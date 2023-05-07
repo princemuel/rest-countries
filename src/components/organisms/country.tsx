@@ -1,15 +1,15 @@
 import { Link } from 'react-router-dom';
 import { ICountry } from '../../@types';
-import { hasValues } from '../../utils';
+import { hasValues } from '../../lib/utils';
 import { Text } from '../atoms';
 
-type Props = {
+interface Props {
   country: ICountry;
   borders: {
     name: string;
     code: string;
   }[];
-};
+}
 
 const CountryDetails = ({ country, borders }: Props) => {
   const currencies = country?.currencies;

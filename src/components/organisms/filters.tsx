@@ -1,6 +1,6 @@
 import { FilterForm, SearchForm } from '../molecules';
 
-type Props = {};
+interface Props {}
 
 const Filters = (props: Props) => {
   return (

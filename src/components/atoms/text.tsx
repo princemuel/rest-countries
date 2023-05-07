@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-type TextProps<E extends React.ElementType<any>> = {
+interface TextProps<E extends React.ElementType<any>> {
   children: React.ReactNode;
   variant?: E;
-};
+}
 
 type Props<E extends React.ElementType<any>> = TextProps<E> &
   Omit<React.ComponentPropsWithoutRef<E>, keyof TextProps<E>>;

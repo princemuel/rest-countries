@@ -1,8 +1,10 @@
-import { useSetTheme, useTheme } from '../../context';
-import { clsx } from '../../utils';
+import clsx from 'clsx';
+import { useSetTheme, useTheme } from '../../lib';
 import { Text } from './text';
 
-type Props = { classname: string };
+interface Props {
+  classname: string;
+}
 
 const ThemeBtn = ({ classname }: Props) => {
   const setTheme = useSetTheme();

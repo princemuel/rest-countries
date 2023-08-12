@@ -1,15 +1,14 @@
-import { ReactInputEvent } from '../../@types';
-import { useCountriesDispatch, useTheme } from '../../lib';
+import { useCountriesDispatch, useTheme } from "../../lib";
 
 interface Props {}
 
 const SearchForm = (props: Props) => {
   const theme = useTheme();
-  const url = theme === 'light' ? 'light' : 'dark';
+  const url = theme === "light" ? "light" : "dark";
   const dispatch = useCountriesDispatch();
 
   function handleSearch(e: ReactInputEvent) {
-    dispatch({ type: 'SEARCH', payload: e.target.value });
+    dispatch({ type: "SEARCH", payload: e.target.value });
   }
 
   return (

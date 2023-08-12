@@ -1,12 +1,11 @@
-import clsx from 'clsx';
-import { useRef, useState } from 'react';
-import { ReactSelectEvent } from '../../@types';
+import clsx from "clsx";
+import { useRef, useState } from "react";
 import {
   hasValues,
   useCountriesDispatch,
   useCountriesState,
   useTheme,
-} from '../../lib';
+} from "../../lib";
 
 interface Props {}
 
@@ -16,16 +15,16 @@ const FilterForm = (props: Props) => {
   const dispatch = useCountriesDispatch();
 
   const [showDropdown, setShowDropdown] = useState(false);
-  const [filterValue, setFilterValue] = useState('');
+  const [filterValue, setFilterValue] = useState("");
 
   const ref = useRef<HTMLUListElement>(null);
 
   const regions = state?.regions;
-  const url = theme === 'light' ? 'light' : 'dark';
+  const url = theme === "light" ? "light" : "dark";
 
   function handleFilter(e: ReactSelectEvent) {
     setFilterValue(e.currentTarget.textContent!);
-    dispatch({ type: 'FILTER', payload: e.currentTarget.textContent! });
+    dispatch({ type: "FILTER", payload: e.currentTarget.textContent! });
     setShowDropdown(false);
   }
 
@@ -42,10 +41,10 @@ const FilterForm = (props: Props) => {
           aria-controls='regions'
           onClick={() => setShowDropdown((prev) => !prev)}
         >
-          <span>{filterValue || 'Filter by Region'}</span>
+          <span>{filterValue || "Filter by Region"}</span>
           <img
             src={`/assets/expand-${url}.svg`}
-            alt={'click to select region'}
+            alt={"click to select region"}
             aria-hidden='true'
           />
         </button>

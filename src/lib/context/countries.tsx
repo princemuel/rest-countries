@@ -1,10 +1,9 @@
-import { produce } from 'immer';
-import * as React from 'react';
-import { ICountry } from '../../@types';
-import { getCountries, getRegions } from '../lib';
+import { produce } from "immer";
+import * as React from "react";
+import { getCountries, getRegions } from "../lib";
 
 interface IState {
-  countries: ICountry[];
+  countries: CountryType[];
   regions: string[];
   filter: string;
   search: string;
@@ -12,11 +11,11 @@ interface IState {
 
 type IActions =
   | {
-      type: 'INITIALIZE';
-      payload: { countries: ICountry[]; regions: string[] };
+      type: "INITIALIZE";
+      payload: { countries: CountryType[]; regions: string[] };
     }
-  | { type: 'SEARCH'; payload: string }
-  | { type: 'FILTER'; payload: string };
+  | { type: "SEARCH"; payload: string }
+  | { type: "FILTER"; payload: string };
 
 const CountriesContext = React.createContext<IState | undefined>(undefined);
 
@@ -27,8 +26,8 @@ const CountriesDispatch = React.createContext<
 const initialState: IState = {
   countries: [],
   regions: [],
-  filter: 'All',
-  search: '',
+  filter: "All",
+  search: "",
 };
 
 interface Props {
@@ -44,7 +43,7 @@ export const CountriesProvider = ({ children }: Props) => {
       const res = await getRegions();
 
       dispatch({
-        type: 'INITIALIZE',
+        type: "INITIALIZE",
         payload: {
           countries: response,
           regions: res,
@@ -88,14 +87,14 @@ export function useCountriesDispatch() {
 
 const reducer = produce((draft: IState, action: IActions) => {
   switch (action.type) {
-    case 'INITIALIZE':
+    case "INITIALIZE":
       draft.countries = action?.payload.countries;
       draft.regions = action?.payload.regions;
       break;
-    case 'SEARCH':
+    case "SEARCH":
       draft.search = action.payload;
       break;
-    case 'FILTER':
+    case "FILTER":
       draft.filter = action.payload;
       break;
     default: {

@@ -1,5 +1,18 @@
+import { CountriesProvider } from '@/context';
+import { request } from '@/helpers';
+import HomepageTemplate from './home';
+
+const url = `
+  ${process.env.NEXT_PUBLIC_COUNTRIES_BASE_URL}/all?fields=name,flags
+`;
 async function PageRoute() {
-  return <main>Hello</main>;
+  const response = request(url);
+
+  return (
+    <CountriesProvider promise={response}>
+      <HomepageTemplate />
+    </CountriesProvider>
+  );
 }
 
 export default PageRoute;

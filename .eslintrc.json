@@ -1,0 +1,8 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "globals": { "React": "readonly" },
+  "rules": {
+    // "no-unused-vars": "warn"
+    "react/no-unescaped-entities": "off"
+  }
+}

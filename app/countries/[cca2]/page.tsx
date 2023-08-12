@@ -1,5 +1,5 @@
 async function PageRoute() {
-  return <main>Hello</main>;
+  return <main>CCA2</main>;
 }
 
 export default PageRoute;

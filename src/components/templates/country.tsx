@@ -1,25 +1,18 @@
+import { useParams } from "react-router-dom";
 import { BackBtn } from "../atoms";
+import { CountryDetails } from "../organisms";
 
-interface Props {
-  country: CountryType;
-  borders: {
-    name: string;
-    code: string;
-  }[];
-}
+const CountryTemplate = () => {
+  const { id } = useParams();
 
-const CountryTemplate = (props: Props) => {
   return (
     <>
       <section className='my-20 h-container'>
         <BackBtn />
       </section>
 
-      <section
-        className='my-20 h-container'
-        // aria-labelledby={country?.name?.official}
-      >
-        {/* <CountryDetails country={country} borders={borders} id='' /> */}
+      <section className='my-20 h-container'>
+        <CountryDetails countryId={id} />
       </section>
     </>
   );

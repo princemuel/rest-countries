@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import { Layout } from "../components";
 import { ErrorPage } from "./404";
-import { Country } from "./country";
+import { CountryRoute } from "./country";
 import { Home } from "./home";
 
 export const router = createBrowserRouter(
@@ -13,7 +13,7 @@ export const router = createBrowserRouter(
     <Route element={<Layout />}>
       <Route path='/' element={<Home />} />
       <Route path='countries'>
-        <Route path=':id' element={<Country />} />
+        <Route path=':id' element={<CountryRoute />} />
       </Route>
 
       <Route path='*' element={<ErrorPage />} />

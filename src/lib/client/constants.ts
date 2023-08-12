@@ -1,7 +1,7 @@
 import { hasValues } from "../utils";
 import rqFetcher from "./fetch";
 
-export const BASE_URL = "https://restcountries.com/v3";
+export const BASE_URL = "https://restcountries.com/v3.1";
 
 export async function fetchCountries() {
   const response = await rqFetcher<CountryType[]>("/all")();

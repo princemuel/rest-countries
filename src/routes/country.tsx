@@ -1,8 +1,8 @@
-import { useLoaderData } from 'react-router-dom';
-import { ICountry } from '../@types';
-import { CountryTemplate } from '../components';
-import { fetcher } from '../lib';
-import { hasValues } from '../lib/utils';
+import { useLoaderData } from "react-router-dom";
+import { ICountry } from "../@types";
+import { CountryTemplate } from "../components";
+import { fetcher } from "../lib";
+import { hasValues } from "../lib/utils";
 
 type Props = {};
 
@@ -22,12 +22,11 @@ const Country = (props: Props) => {
   );
 };
 
-export { Country };
-export { loader as countryLoader };
+export { Country, loader as countryLoader };
 
 // @ts-expect-error
 async function loader({ params }) {
-  const response = await fetcher(`/alpha/${params?.countryId}`);
+  const response = await fetcher(`/alpha/${params?.id}`);
   const country = response.data as ICountry;
   const codes = country.borders;
   const borders = hasValues(codes)

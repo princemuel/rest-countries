@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
-import { ICountry } from '../../@types';
-import { BackBtn } from '../atoms';
-import { CountryDetails } from '../organisms';
+import { Fragment } from "react";
+import { ICountry } from "../../@types";
+import { BackBtn } from "../atoms";
+import { CountryDetails } from "../organisms";
 
 interface Props {
   country: ICountry;
@@ -19,7 +19,7 @@ const CountryTemplate = ({ country, borders }: Props) => {
       </section>
 
       <section className='my-20 h-container' aria-labelledby={country?.name}>
-        <CountryDetails country={country} borders={borders} />
+        <CountryDetails country={country} borders={borders} id='' />
       </section>
     </Fragment>
   );

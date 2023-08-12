@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom';
-import { ICountry } from '../../@types';
-import { hasValues } from '../../lib/utils';
-import { Text } from '../atoms';
+import { useQuery } from "@tanstack/react-query";
+import { Link, useParams } from "react-router-dom";
+import { ICountry } from "../../@types";
+import { BASE_URL } from "../../lib";
+import { hasValues } from "../../lib/utils";
+import { Text } from "../atoms";
 
 interface Props {
   country: ICountry;
@@ -9,9 +11,38 @@ interface Props {
     name: string;
     code: string;
   }[];
+  id: string;
+}
+
+async function fetchCountryById(id = "") {
+  const response = await fetch(`${BASE_URL}/alpha/${id}`);
+  const country: ICountry = await response.json();
+
+  const codes = country?.borders || [];
+
+  console.log(codes);
+
+  const borders = await Promise.all(
+    codes.map(async (code) => {
+      const response = await fetch(`${BASE_URL}/alpha/${code}`);
+      const data = (await response.json()) as ICountry;
+      return { name: data?.name, code: data?.alpha3Code };
+    })
+  );
+
+  return { borders, country };
 }
 
 const CountryDetails = ({ country, borders }: Props) => {
+  const { id } = useParams();
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["countries", id],
+    queryFn: () => fetchCountryById(id),
+  });
+
+  console.log(data);
+
   const currencies = country?.currencies;
   const languages = country?.languages;
 
@@ -43,7 +74,7 @@ const CountryDetails = ({ country, borders }: Props) => {
             <Text className='flex items-center gap-2 leading-[1.6rem]'>
               <span className='font-semibold'>Population:</span>
               <span className='font-light'>
-                {(country?.population).toLocaleString('en-US')}
+                {(country?.population).toLocaleString("en-US")}
               </span>
             </Text>
             <Text className='flex items-center gap-2 leading-[1.6rem]'>
@@ -56,7 +87,7 @@ const CountryDetails = ({ country, borders }: Props) => {
             </Text>
             <Text className='flex items-center gap-2 leading-[1.6rem]'>
               <span className='font-semibold'>Capital:</span>
-              <span className='font-light'>{country?.capital || 'None'}</span>
+              <span className='font-light'>{country?.capital || "None"}</span>
             </Text>
           </div>
 
@@ -87,8 +118,8 @@ const CountryDetails = ({ country, borders }: Props) => {
               <span className='font-semibold'>Languages:</span>
               <span className='font-light'>
                 {hasValues(languages)
-                  ? languages.map(({ name }) => name).join(', ')
-                  : 'None'}
+                  ? languages.map(({ name }) => name).join(", ")
+                  : "None"}
               </span>
             </Text>
           </div>

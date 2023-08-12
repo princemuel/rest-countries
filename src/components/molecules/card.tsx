@@ -1,22 +1,28 @@
-import { Link } from 'react-router-dom';
-import type { ICountry } from '../../@types';
-import { Text } from '../atoms';
+import { Link } from "react-router-dom";
+import { Text } from "../atoms";
 
 interface Props {
-  country: ICountry;
+  country: CountryType;
 }
+
+// async function fetchCountryById(id = "") {
+//   const response = await fetch(`${BASE_URL}/alpha/${id}`);
+//   const country: CountryType = await response.json();
+
+//   return { country };
+// }
 
 const Card = ({ country }: Props) => {
   return (
-    <article key={country.alpha3Code} className='h-full'>
+    <article key={country?.cca3} className='h-full'>
       <Link
-        to={`/countries/${country?.alpha3Code}`}
+        to={`/countries/${country?.cca3}`}
         className='flex h-full max-w-md cursor-pointer flex-col overflow-hidden rounded-lg shadow-card'
       >
         <figure className='flex-1 overflow-hidden'>
           <img
             src={country?.flags?.svg}
-            alt={country?.name}
+            alt={country?.name.official}
             className='h-full w-full object-cover'
           />
         </figure>
@@ -26,7 +32,7 @@ const Card = ({ country }: Props) => {
             variant='h3'
             className='mt-4 mb-6 text-[1.8rem] font-extrabold leading-[2.6rem]'
           >
-            {country?.name}
+            {country?.name?.common}
           </Text>
 
           <div className='> * + * space-y-4'>
@@ -35,7 +41,7 @@ const Card = ({ country }: Props) => {
                 Population:
               </Text>
               <Text variant='span' className='font-light'>
-                {(country?.population).toLocaleString('en-US')}
+                {(country?.population || 0).toLocaleString("en-US")}
               </Text>
             </Text>
 
@@ -53,7 +59,7 @@ const Card = ({ country }: Props) => {
                 Capital:
               </Text>
               <Text variant='span' className='font-light'>
-                {country?.capital || ''}
+                {country?.capital || ""}
               </Text>
             </Text>
           </div>

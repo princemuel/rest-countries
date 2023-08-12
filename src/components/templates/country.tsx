@@ -1,27 +1,20 @@
-import { Fragment } from "react";
-import { ICountry } from "../../@types";
+import { useParams } from "react-router-dom";
 import { BackBtn } from "../atoms";
 import { CountryDetails } from "../organisms";
 
-interface Props {
-  country: ICountry;
-  borders: {
-    name: string;
-    code: string;
-  }[];
-}
+const CountryTemplate = () => {
+  const { id } = useParams();
 
-const CountryTemplate = ({ country, borders }: Props) => {
   return (
-    <Fragment>
+    <>
       <section className='my-20 h-container'>
         <BackBtn />
       </section>
 
-      <section className='my-20 h-container' aria-labelledby={country?.name}>
-        <CountryDetails country={country} borders={borders} id='' />
+      <section className='my-20 h-container'>
+        <CountryDetails countryId={id} />
       </section>
-    </Fragment>
+    </>
   );
 };
 

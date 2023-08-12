@@ -23,8 +23,6 @@
     /* user defined */
     "incremental": true,
     "allowJs": true,
-    "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] },
     "forceConsistentCasingInFileNames": true
   },
   "include": [

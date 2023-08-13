@@ -36,7 +36,7 @@ const CountriesList = () => {
                 blurDataURL={flag.blurredDataUrl}
               />
 
-              <div className='flex flex-col items-start gap-4 px-4 py-8'>
+              <div className='flex flex-col items-start gap-4 px-8 py-8 sm:px-4'>
                 <header>
                   <h3 className='text-lg font-extrabold'>
                     {country?.name?.common}
@@ -44,22 +44,22 @@ const CountriesList = () => {
                 </header>
 
                 <div aria-label={`${country?.name?.common} details`}>
-                  <dl className='grid grid-cols-[10ch_auto] '>
+                  <dl className='grid grid-cols-[3vw_auto] '>
                     <dt className='font-semibold'>Capital:</dt>
                     <dd className='font-light'>{country?.capital} </dd>
                   </dl>
 
-                  <dl className='grid grid-cols-[10ch_auto]'>
+                  <dl className='grid grid-cols-[3vw_auto]'>
                     <dt className='font-semibold'>Region:</dt>
                     <dd className='font-light'>{country?.region} </dd>
                   </dl>
 
-                  <dl className='grid grid-cols-[10ch_auto] '>
+                  <dl className='grid grid-cols-[3vw_auto] '>
                     <dt className='font-semibold'>Domain:</dt>
                     <dd className='font-light'>{country?.tld} </dd>
                   </dl>
 
-                  <dl className='grid grid-cols-[10ch_auto]'>
+                  <dl className='grid grid-cols-[3vw_auto]'>
                     <dt className='font-semibold'>Population:</dt>
                     <dd className='font-light'>
                       {(country?.population || 0).toLocaleString('en-US')}

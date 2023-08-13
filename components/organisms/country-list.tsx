@@ -1,17 +1,23 @@
 'use client';
 
-import { useCountries } from '@/context';
+import { useCountries, useImages } from '@/context';
 import NextImage from 'next/image';
 import NextLink from 'next/link';
 import * as React from 'react';
 
 const CountriesList = () => {
   const countriesPromise = useCountries();
+  const imagesPromise = useImages();
+
+  // unwrap the promises
   const countries = React.use(countriesPromise);
+  const images = React.use(imagesPromise);
 
   return (
     <div className='grid gap-8 grid-cols-auto md:gap-8'>
       {countries.map((country) => {
+        const flag = images.filter((image) => image.tag === country.cca3)[0];
+
         return (
           <article
             key={country?.name?.common}
@@ -19,15 +25,15 @@ const CountriesList = () => {
           >
             <NextLink href={`/countries/${country?.cca3}`} className='block'>
               <NextImage
-                src={country?.flags?.svg}
-                alt={country?.flags?.alt || ''}
+                src={flag.url}
+                alt={flag?.alt || ''}
                 width={672}
                 height={378}
                 style={{ height: 'auto' }}
                 sizes='(min-width: 720px) 672px, calc(95.5vw - 19px)'
                 className='aspect-video object-cover'
-
-                // placeholder='blur'
+                placeholder='blur'
+                blurDataURL={flag.blurredDataUrl}
               />
 
               <div className='flex flex-col items-start gap-4 px-4 py-8'>

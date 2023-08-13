@@ -1,8 +1,11 @@
 import { BaseLayout } from '@/components';
+import { seo } from '@/config';
 import { Providers } from '@/context';
 import { cn } from '@/helpers';
 import { fonts } from './fonts';
 import './globals.css';
+
+export const metadata = seo;
 
 export default function RootLayout({
   children,

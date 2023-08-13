@@ -1,6 +1,6 @@
 'use client';
 
-import { useCountry } from '@/context';
+import { useCountry, useImage } from '@/context';
 import { hasValues } from '@/helpers';
 import NextImage from 'next/image';
 import NextLink from 'next/link';
@@ -13,7 +13,10 @@ interface Props {}
 
 export const CountryDetails = (props: Props) => {
   const countryPromise = useCountry();
+  const imagePromise = useImage();
+
   const country = React.use(countryPromise)[0];
+  const blurDataUrl = React.use(imagePromise);
 
   return (
     <div>
@@ -26,8 +29,9 @@ export const CountryDetails = (props: Props) => {
           style={{ height: 'auto' }}
           sizes='(min-width: 720px) 672px, calc(95.5vw - 19px)'
           className='aspect-video object-cover'
-
-          // placeholder='blur'
+          priority={true}
+          blurDataURL={blurDataUrl}
+          placeholder='blur'
         />
 
         <header>

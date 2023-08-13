@@ -1,5 +1,11 @@
-import { CountryProvider } from '@/context';
-import { request } from '@/helpers';
+import { CountryProvider, ImageProvider } from '@/context';
+import {
+  getAllCountries,
+  getCountryBySlug,
+  preloadBase64,
+  preloadCountry,
+  toBase64,
+} from '@/lib';
 import type { Metadata } from 'next';
 import CountryDetailsTemplate from './country';
 
@@ -8,13 +14,17 @@ interface Props {
 }
 
 async function PageRoute({ params: { slug } }: Props) {
-  const url = `${process.env.NEXT_PUBLIC_COUNTRIES_BASE_URL}/alpha/${slug}`;
+  preloadCountry(slug);
 
-  const response = request(url);
+  const imageResponse = await getCountryBySlug(slug);
+
+  preloadBase64(imageResponse[0].flags.svg);
 
   return (
-    <CountryProvider promise={response}>
-      <CountryDetailsTemplate />
+    <CountryProvider promise={getCountryBySlug(slug)}>
+      <ImageProvider promise={toBase64(imageResponse[0].flags.svg)}>
+        <CountryDetailsTemplate />
+      </ImageProvider>
     </CountryProvider>
   );
 }
@@ -22,11 +32,7 @@ async function PageRoute({ params: { slug } }: Props) {
 export default PageRoute;
 
 export async function generateStaticParams() {
-  const url = `
-    ${process.env.NEXT_PUBLIC_COUNTRIES_BASE_URL}/all?fields=name,flags,population,region,capital,cca3,tld
-  `;
-
-  const countries: CountryType[] = await request(url);
+  const countries = await getAllCountries();
 
   return (countries || []).map((country) => ({ slug: country?.cca3 }));
 }
@@ -34,11 +40,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params: { slug },
 }: Props): Promise<Metadata> {
-  const url = `${process.env.NEXT_PUBLIC_COUNTRIES_BASE_URL}/alpha/${slug}`;
+  const response = await getCountryBySlug(slug);
 
-  const response = await request(url);
-
-  const country: CountryType = response[0];
+  const country = response[0];
 
   if (!country)
     return {

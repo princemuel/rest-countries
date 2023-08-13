@@ -15,6 +15,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      cursor: { pointer: pointer },
       borderRadius: {
         brand: '0.8rem',
         pill: '100vmax',

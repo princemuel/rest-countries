@@ -30,6 +30,12 @@ const nextConfig = {
         port: '',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'https://mainfacts.com',
+        port: '',
+        pathname: '**',
+      },
     ],
   },
 };

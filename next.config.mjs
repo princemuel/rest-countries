@@ -17,7 +17,7 @@ const nextConfig = {
         patterns: [
           {
             from: 'node_modules/leaflet/dist/images',
-            to: path.resolve(__dirname, 'public', 'leaflet', 'images'),
+            to: path.resolve(process.cwd(), 'public', 'leaflet', 'images'),
           },
         ],
       })

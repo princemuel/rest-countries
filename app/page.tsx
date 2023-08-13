@@ -1,16 +1,24 @@
 import { CountriesProvider, ImagesProvider } from '@/context';
-import { blurDataUrls, getAllCountries } from '@/lib';
+import {
+  blurDataUrls,
+  getAllCountries,
+  preloadBlurDataUrls,
+  preloadCountries,
+} from '@/lib';
 import HomepageTemplate from './home';
 
 async function PageRoute() {
-  const imageResponse = await getAllCountries();
+  preloadCountries();
 
+  const imageResponse = await getAllCountries();
   const images = (imageResponse || []).map((response) => ({
     tag: response?.cca3,
     url: response?.flags?.svg,
     alt: response?.flags?.alt,
     blurredDataUrl: '',
   }));
+
+  preloadBlurDataUrls(images);
 
   return (
     <CountriesProvider promise={getAllCountries()}>

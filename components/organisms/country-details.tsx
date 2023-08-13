@@ -132,7 +132,7 @@ export const CountryDetails = (props: Props) => {
               scrollWheelZoom={false}
               location={country?.latlng}
               className=''
-              placeholder={<MapPlaceholder />}
+              placeholder={<MapPlaceholder location={country?.name.common} />}
             >
               {({ TileLayer, Marker, Popup }) => (
                 <React.Fragment>
@@ -146,7 +146,7 @@ export const CountryDetails = (props: Props) => {
                       country?.latlng || [51.51, -0.08]
                     }
                   >
-                    <Popup>Capital of {country?.name?.official}</Popup>
+                    <Popup>Capital</Popup>
                   </Marker>
                 </React.Fragment>
               )}

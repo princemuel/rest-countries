@@ -1,15 +1,17 @@
 'use client';
 
-import { useCountries } from '@/context';
-import { use } from 'react';
+import { CountriesList } from '@/components';
 
 const HomepageTemplate = () => {
-  const countriesPromise = useCountries();
-  const countries = use(countriesPromise);
+  return (
+    <main className='flex flex-col gap-20'>
+      <section className='h-container'></section>
 
-  console.log(countries);
-
-  return <div>Home</div>;
+      <section className='h-container'>
+        <CountriesList />
+      </section>
+    </main>
+  );
 };
 
 export default HomepageTemplate;

@@ -1,5 +1,5 @@
 import { BaseLayout } from '@/components';
-import { Providers } from '@/contexts';
+import { Providers } from '@/context';
 import { cn } from '@/helpers';
 import { fonts } from './fonts';
 import './globals.css';

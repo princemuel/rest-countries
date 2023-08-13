@@ -23,7 +23,7 @@ interface CountryType {
   subregion?: string;
   languages?: Languages;
   translations: Translations;
-  latlng: number[];
+  latlng: [number, number];
   landlocked: boolean;
   borders?: string[];
   area: number;
@@ -2294,7 +2294,7 @@ interface CoatOfArms {
 }
 
 interface CapitalInfo {
-  latlng?: number[];
+  latlng?: [number, number];
 }
 
 interface PostalCode {

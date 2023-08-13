@@ -3,3 +3,11 @@ export const REST_COUNTRIES_API =
 export const SITE_URL =
   process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
 export const baseUrl = new URL('/', SITE_URL);
+
+// Set default sizing to control aspect ratio which will scale responsively but also help avoid layout shifts
+export const DEFAULT_MAP_WIDTH = 640;
+export const DEFAULT_MAP_HEIGHT = 360;
+export const DEFAULT_MAP_URL =
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+export const DEFAULT_MAP_ATTRIBUTION =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';

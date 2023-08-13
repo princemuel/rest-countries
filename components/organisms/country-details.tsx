@@ -1,10 +1,13 @@
 'use client';
 
+import { DEFAULT_MAP_ATTRIBUTION, DEFAULT_MAP_URL } from '@/config';
 import { useCountry, useImage } from '@/context';
 import { hasValues } from '@/helpers';
 import NextImage from 'next/image';
 import NextLink from 'next/link';
 import * as React from 'react';
+import { MapPlaceholder } from '../atoms';
+import { Map } from '../molecules';
 
 interface Props {}
 
@@ -109,8 +112,47 @@ export const CountryDetails = (props: Props) => {
         <p>{JSON.stringify(country?.capitalInfo)}</p>
 
         <p>{JSON.stringify(country?.timezones)}</p>
-        <p>{JSON.stringify(country?.timezones)}</p>
         <p>{JSON.stringify(country?.car?.side)}</p>
+
+        <div className='my-10 overflow-hidden rounded-sm'>
+          <header className='bg-stone-200 p-3 dark:bg-slate-300'>
+            <h4 className='text-base font-bold capitalize text-neutral-700'>
+              Map of {country?.name?.common}
+            </h4>
+          </header>
+
+          <div className='bg-stone-100 p-3 dark:bg-slate-100'>
+            <Map
+              width='640'
+              height='360'
+              center={
+                country?.capitalInfo?.latlng || country?.latlng || [51, -0.09]
+              }
+              zoom={country?.latlng ? 7 : 2}
+              scrollWheelZoom={false}
+              location={country?.latlng}
+              className=''
+              placeholder={<MapPlaceholder location={country?.name.common} />}
+            >
+              {({ TileLayer, Marker, Popup }) => (
+                <React.Fragment>
+                  <TileLayer
+                    url={DEFAULT_MAP_URL}
+                    attribution={DEFAULT_MAP_ATTRIBUTION}
+                  />
+                  <Marker
+                    position={
+                      country?.capitalInfo?.latlng ||
+                      country?.latlng || [51.51, -0.08]
+                    }
+                  >
+                    <Popup>Capital</Popup>
+                  </Marker>
+                </React.Fragment>
+              )}
+            </Map>
+          </div>
+        </div>
       </article>
       {/* <NextLink href={'/'}>Hello</NextLink> */}
       {/* <pre>{JSON.stringify(country, null, 2)}</pre> */}

@@ -1,15 +1,15 @@
-import { CountriesList } from '@/components';
+import { CountryDetails } from '@/components';
 
-const HomepageTemplate = () => {
+const CountryDetailsTemplate = () => {
   return (
     <main className='flex flex-col gap-20'>
       <section className='h-container'></section>
 
       <section className='h-container'>
-        <CountriesList />
+        <CountryDetails />
       </section>
     </main>
   );
 };
 
-export default HomepageTemplate;
+export default CountryDetailsTemplate;

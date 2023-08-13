@@ -9,7 +9,6 @@ const CountriesList = () => {
   const countriesPromise = useCountries();
   const countries = React.use(countriesPromise);
 
-  console.log(countries);
   return (
     <div className='grid gap-8 grid-cols-auto md:gap-8'>
       {countries.map((country) => {

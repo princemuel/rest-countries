@@ -5,15 +5,15 @@
 @layer base {
   html {
     box-sizing: border-box;
-    font-size: 62.5%;
+    /* font-size: 62.5%; */
     text-rendering: optimizeSpeed;
     text-size-adjust: none;
   }
-  @media (min-width: 112.5em) {
+  /* @media (min-width: 112.5em) {
     html {
       font-size: 75%;
     }
-  }
+  } */
 
   :where(body) {
     min-block-size: 100vh;
@@ -25,8 +25,38 @@
     position: relative;
   }
 
+  :where(a, button, label, select, summary, [role='button'], [role='option']) {
+    @apply cursor-pointer;
+  }
+  :where(textarea) {
+    resize: vertical;
+    resize: block;
+  }
+
   :where(:focus-visible) {
     outline: 2px solid var(--focus-color, Highlight);
     outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :where(html:focus-within) {
+      scroll-behavior: smooth;
+      /* scroll-behavior: auto; */
+    }
+  }
+
+  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

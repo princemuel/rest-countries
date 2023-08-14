@@ -10,7 +10,7 @@ const { MapContainer } = ReactLeaflet;
 
 // @ts-expect-error
 interface Props extends ReactLeaflet.MapContainerProps {
-  children: (f1: typeof ReactLeaflet, f2: typeof Leaflet) => React.ReactNode;
+  children: (value: typeof ReactLeaflet) => React.ReactNode;
 }
 
 const Map = ({ children, className, ...rest }: Props) => {
@@ -28,7 +28,7 @@ const Map = ({ children, className, ...rest }: Props) => {
 
   return (
     <MapContainer className={cn('h-[30vmax]', className)} {...rest}>
-      {children?.(ReactLeaflet, Leaflet)}
+      {children?.(ReactLeaflet)}
     </MapContainer>
   );
 };

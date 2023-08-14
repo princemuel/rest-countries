@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className={cn(fonts)}>
+    <html lang='en' className={cn(fonts)} suppressHydrationWarning>
       <body className='bg-brand-100 text-brand-300 transition-colors duration-500 dark:bg-brand-400 dark:text-white'>
         <Providers>
           <BaseLayout>{children}</BaseLayout>

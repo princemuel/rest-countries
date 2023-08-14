@@ -1,5 +1,4 @@
 import { DEFAULT_MAP_HEIGHT, DEFAULT_MAP_WIDTH } from '@/config';
-import Leaflet from 'leaflet';
 import dynamic from 'next/dynamic';
 import * as ReactLeaflet from 'react-leaflet';
 
@@ -7,7 +6,7 @@ import * as ReactLeaflet from 'react-leaflet';
 interface Props extends ReactLeaflet.MapContainerProps {
   width: string | number;
   height: string | number;
-  children: (f1: typeof ReactLeaflet, f2: typeof Leaflet) => React.ReactNode;
+  children: (value: typeof ReactLeaflet) => React.ReactNode;
   location: [number, number];
 }
 const DynamicMap = dynamic(() => import('../atoms/base-map'), {

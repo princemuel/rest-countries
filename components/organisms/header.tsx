@@ -1,3 +1,5 @@
+import { ThemeSwitch } from '../atoms';
+
 export function Header() {
   return (
     <header className='sticky top-0 z-50 bg-white shadow-header dark:bg-brand-500'>
@@ -6,7 +8,9 @@ export function Header() {
           Where in the world?
         </h1>
 
-        <div>The</div>
+        <div className=''>
+          <ThemeSwitch />
+        </div>
       </div>
     </header>
   );

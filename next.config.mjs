@@ -9,9 +9,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
-  webpack(config, { isServer }) {
-    if (!isServer) config.resolve.fallback.fs = false;
-
+  webpack(config) {
     config.plugins.push(
       new CopyPlugin({
         patterns: [
@@ -24,15 +22,8 @@ const nextConfig = {
     );
     return config;
   },
-  // typescript: {
-  //   ignoreBuildErrors: process.env.NODE_ENV === 'production',
-  // },
   reactStrictMode: true,
-  experimental: {
-    typedRoutes: true,
-    serverActions: true,
-    webVitalsAttribution: ['CLS', 'LCP'],
-  },
+
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [

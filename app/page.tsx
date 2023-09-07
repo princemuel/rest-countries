@@ -12,7 +12,7 @@ async function PageRoute() {
 
   const imageResponse = await getAllCountries();
   const images = (imageResponse || []).map((response) => ({
-    tag: response?.cca3,
+    cca3: response?.cca3,
     url: response?.flags?.svg,
     alt: response?.flags?.alt,
     blurredDataUrl: '',

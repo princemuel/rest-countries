@@ -3,18 +3,18 @@ import NextLink from 'next/link';
 
 interface Props {
   country: CountryType;
-  flag: Photo;
+  flag?: Photo;
 }
 
 export const CountryCard = ({ country, flag }: Props) => {
   return (
     <article
       key={country?.name?.common}
-      className='overflow-hidden rounded-md bg-white dark:bg-brand-500'
+      className='w-full max-w-xs overflow-hidden rounded-md bg-white shadow-card transition-colors duration-500 ease-in dark:bg-brand-500'
     >
       <NextLink href={`/countries/${country?.cca3}`} className='block'>
         <NextImage
-          src={flag.url}
+          src={flag?.url || country?.flag}
           alt={flag?.alt || ''}
           width={672}
           height={378}
@@ -22,7 +22,7 @@ export const CountryCard = ({ country, flag }: Props) => {
           sizes='(min-width: 720px) 672px, calc(95.5vw - 19px)'
           className='aspect-video object-cover'
           placeholder='blur'
-          blurDataURL={flag.blurredDataUrl}
+          blurDataURL={flag?.blurredDataUrl}
         />
 
         <div className='flex flex-col items-start gap-4 px-5 py-8 sm:px-4'>

@@ -1,10 +1,8 @@
-import { CountryProvider, ImageProvider } from '@/context';
 import {
   getAllCountries,
   getCountryBySlug,
   preloadBase64,
   preloadCountry,
-  toBase64,
 } from '@/lib';
 import type { Metadata } from 'next';
 import CountryDetailsTemplate from './country';
@@ -20,13 +18,7 @@ async function PageRoute({ params: { slug } }: Props) {
 
   preloadBase64(imageResponse[0].flags.svg);
 
-  return (
-    <CountryProvider promise={getCountryBySlug(slug)}>
-      <ImageProvider promise={toBase64(imageResponse[0].flags.svg)}>
-        <CountryDetailsTemplate />
-      </ImageProvider>
-    </CountryProvider>
-  );
+  return <CountryDetailsTemplate slug={slug} />;
 }
 
 export default PageRoute;

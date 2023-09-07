@@ -62,7 +62,7 @@ export const CountryDetails = async ({ slug }: Props) => {
                 <dd className='font-light'>
                   {lf.format(
                     // @ts-expect-error
-                    Object.values(country?.name?.nativeName).map(
+                    (Object.values(country?.name?.nativeName) || []).map(
                       // @ts-expect-error type issue
                       (name) => name?.common
                     )
@@ -117,7 +117,7 @@ export const CountryDetails = async ({ slug }: Props) => {
                 <dt className='font-semibold'>Languages:</dt>
                 <dd className='whitespace-pre font-light'>
                   {/* @ts-expect-error type issue */}
-                  {lf.format(Object.values(country?.languages))}
+                  {lf.format(Object.values(country?.languages) || [])}
                 </dd>
               </dl>
 
@@ -151,7 +151,7 @@ export const CountryDetails = async ({ slug }: Props) => {
               <React.Suspense fallback={<div>Loading..</div>}>
                 <div className='flex flex-wrap gap-3'>
                   {hasValues(borders) ? (
-                    borders.map((border) => {
+                    borders?.map((border) => {
                       return (
                         <dd
                           key={border?.cca3}

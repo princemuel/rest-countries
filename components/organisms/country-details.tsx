@@ -61,9 +61,7 @@ export const CountryDetails = async ({ slug }: Props) => {
                 <dt className='whitespace-pre font-semibold'>Native Name:</dt>
                 <dd className='font-light'>
                   {lf.format(
-                    // @ts-expect-error
-                    (Object.values(country?.name?.nativeName) || []).map(
-                      // @ts-expect-error type issue
+                    (Object.values(country?.name?.nativeName || {}) || []).map(
                       (name) => name?.common
                     )
                   )}
@@ -105,10 +103,9 @@ export const CountryDetails = async ({ slug }: Props) => {
                 <dt className='font-semibold'>Currencies:</dt>
                 <dd className='font-light'>
                   {lf.format(
-                    // @ts-expect-error type issue expected
-                    Object.values(country?.currencies)
-                      // @ts-expect-error type issue expected
-                      .map((currency) => currency?.name)
+                    Object.values(country?.currencies || {}).map(
+                      (currency) => currency?.name
+                    )
                   )}
                 </dd>
               </dl>
@@ -116,8 +113,7 @@ export const CountryDetails = async ({ slug }: Props) => {
               <dl className='flex flex-row gap-2'>
                 <dt className='font-semibold'>Languages:</dt>
                 <dd className='whitespace-pre font-light'>
-                  {/* @ts-expect-error type issue */}
-                  {lf.format(Object.values(country?.languages) || [])}
+                  {lf.format(Object.values(country?.languages || {}) || [])}
                 </dd>
               </dl>
 

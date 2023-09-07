@@ -9,6 +9,10 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
+  experimental: {
+    serverActions:true
+  },
+
   webpack(config) {
     config.plugins.push(
       new CopyPlugin({

@@ -43,5 +43,10 @@
       "sideBar.foreground": "#8BADC1"
     }
   },
-  "exportall.config.folderListener": ["/components"]
+  "exportall.config.folderListener": [
+    "/components"
+  ],
+  "exportall.config.relExclusion": [
+    "/components/atoms/base-map.tsx"
+  ]
 }

@@ -139,7 +139,7 @@ export const CountryDetails = async ({ slug }: Props) => {
           </div>
 
           <div>
-            <dl className='flex flex-row flex-wrap gap-2'>
+            <dl className='flex flex-row flex-wrap items-center gap-2'>
               <dt className='whitespace-pre font-semibold'>
                 Border Countries:
               </dt>
@@ -163,7 +163,9 @@ export const CountryDetails = async ({ slug }: Props) => {
                       );
                     })
                   ) : (
-                    <dd className='text-sm font-light capitalize'>None</dd>
+                    <dd className='flex-1 text-sm font-light capitalize'>
+                      None
+                    </dd>
                   )}
                 </div>
               </React.Suspense>

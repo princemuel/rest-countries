@@ -8,6 +8,7 @@ import { Fragment, use, useMemo, useTransition } from 'react';
 
 export function FilterForm() {
   const [isPending, startTransition] = useTransition();
+
   const countriesPromise = useCountries();
   const countries = use(countriesPromise);
 
@@ -31,10 +32,10 @@ export function FilterForm() {
         });
       }}
     >
-      <div className='z-1 relative mt-1 w-3/4 basis-64'>
+      <div className='relative z-[1] mt-1 w-3/4 basis-64'>
         <Listbox.Button
           className={cn(
-            'relative flex w-full cursor-pointer items-center justify-between rounded-md px-6 py-5 text-left shadow-input outline-none focus:outline-none dark:bg-brand-500 dark:text-white sm:text-sm',
+            'relative flex w-full cursor-pointer items-center justify-between rounded-md bg-white px-6 py-5 text-left text-brand-300 shadow-input outline-none focus:outline-none dark:bg-brand-500 dark:text-white sm:text-sm',
             isPending ? 'opacity-80' : 'opacity-100'
           )}
         >
@@ -43,7 +44,7 @@ export function FilterForm() {
               <span className='block truncate'>{value}</span>
               <span className='pointer-events-none flex items-center'>
                 <ChevronDownIcon
-                  className='h-5 w-5 text-white transition-transform duration-300 ease-in-out ui-open:rotate-180 ui-not-open:rotate-0'
+                  className='h-5 w-5 text-zinc-400 transition-transform duration-300 ease-in-out ui-open:rotate-180 ui-not-open:rotate-0 dark:text-white'
                   aria-hidden='true'
                 />
               </span>
@@ -60,7 +61,7 @@ export function FilterForm() {
           leaveFrom='transform scale-100 opacity-100'
           leaveTo='transform scale-95 opacity-0'
         >
-          <Listbox.Options className='marker: absolute z-10 mt-1 max-h-80 w-full rounded-md py-1 text-base shadow-input focus:outline-none dark:bg-brand-500 dark:text-white sm:text-sm'>
+          <Listbox.Options className='absolute z-10 mt-1 max-h-48 w-full scroll-pt-4 overflow-auto rounded-md bg-white py-1 text-base text-brand-300 shadow-input focus:outline-none dark:bg-brand-500 dark:text-white sm:text-sm'>
             {regions.map((region) => (
               <Listbox.Option
                 key={region.name}

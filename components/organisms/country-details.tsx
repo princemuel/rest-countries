@@ -151,11 +151,11 @@ export const CountryDetails = async ({ slug }: Props) => {
                       return (
                         <dd
                           key={border?.cca3}
-                          className='inline-flex flex-1 items-center justify-center rounded-sm shadow-pill'
+                          className='flex-1 rounded-sm text-center shadow-pill'
                         >
                           <NextLink
                             href={`/countries/${border?.cca3}`}
-                            className='px-4 py-1 text-sm font-light capitalize'
+                            className='inline-flex items-center justify-center px-4 py-1 text-sm font-light capitalize'
                           >
                             {border?.name?.common}
                           </NextLink>

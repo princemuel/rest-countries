@@ -2,20 +2,31 @@
 
 import { MoonIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { useCallback, useTransition } from 'react';
+import * as React from 'react';
 
 export function ThemeSwitch() {
   const { resolvedTheme, setTheme } = useTheme();
+  const [_, startTransition] = React.useTransition();
+  const hasMounted = React.useRef(false);
 
-  const [_, startTransition] = useTransition();
+  React.useEffect(() => {
+    hasMounted.current = true;
+    return () => {
+      hasMounted.current = false;
+    };
+  }, []);
 
   const isDarkTheme = resolvedTheme === 'dark';
 
-  const updateTheme = useCallback(() => {
+  const updateTheme = React.useCallback(() => {
     startTransition(() => {
       setTheme(isDarkTheme ? 'light' : 'dark');
     });
   }, [isDarkTheme, setTheme]);
+
+  const text = isDarkTheme ? 'dark mode' : 'light mode';
+
+  if (!hasMounted.current) return null;
 
   return (
     <button
@@ -24,7 +35,7 @@ export function ThemeSwitch() {
       onClick={updateTheme}
     >
       <MoonIcon fill='white' size={14} strokeWidth={2} />
-      <span>{resolvedTheme} mode</span>
+      <span>{text}</span>
     </button>
   );
 }

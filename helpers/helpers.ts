@@ -22,3 +22,10 @@ export function hasValues<T>(
 ): data is NonNullable<T[]> {
   return (data || []).length > 0;
 }
+
+/*---------------------------------*
+            BROWSER UTILS          *
+  ---------------------------------*
+ */
+export const isBrowser = typeof window !== 'undefined';
+export const isNavigator = typeof navigator !== 'undefined';

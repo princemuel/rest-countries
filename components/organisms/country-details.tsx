@@ -120,7 +120,7 @@ export const CountryDetails = async ({ slug }: Props) => {
               <dl className='flex flex-row gap-2'>
                 <dt className='font-semibold'>Trafic:</dt>
                 <dd className='font-light capitalize'>
-                  {country?.car?.side} hand
+                  {country?.car?.side} hand drive
                 </dd>
               </dl>
 

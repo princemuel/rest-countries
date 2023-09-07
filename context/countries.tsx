@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { FilterProvider } from '.';
 
 const CountriesContext = React.createContext<Promise<CountryType[]> | null>(
   null
@@ -14,7 +15,7 @@ interface Props {
 export const CountriesProvider = ({ children, promise }: Props) => {
   return (
     <CountriesContext.Provider value={promise}>
-      {children}
+      <FilterProvider value={React.use(promise)}>{children}</FilterProvider>
     </CountriesContext.Provider>
   );
 };

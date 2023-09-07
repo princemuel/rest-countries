@@ -25,12 +25,10 @@ const Map = ({ children, className, ...rest }: Props) => {
       });
     })();
   }, []);
-
   return (
     <MapContainer className={cn('h-[30vmax]', className)} {...rest}>
       {children?.(ReactLeaflet)}
     </MapContainer>
   );
 };
-
 export default Map;

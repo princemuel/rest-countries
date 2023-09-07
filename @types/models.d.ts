@@ -1,7 +1,7 @@
 interface Photo {
   alt?: string;
   url: string;
-  tag: string;
+  cca3: string;
   blurredDataUrl: string;
 }
 

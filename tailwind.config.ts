@@ -1,3 +1,4 @@
+import headlesssUi from '@headlessui/tailwindcss';
 import tailwinScrollbar from 'tailwind-scrollbar';
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
@@ -54,7 +55,7 @@ const config: Config = {
         pill: '0px 0px 4px 1px rgba(0, 0, 0, 0.104931)',
         back: '0px 0px 7px rgba(0, 0, 0, 0.293139)',
         glass: `
-        inset 0.25px 1px 0 0 ${theme('colors.rose.200 / 3%')},
+        inset 0.25px 1px 0 0 ${theme('colors.slate.600 / 3%')},
         0px 0.3px 0.3px rgba(3, 2, 2, 0.02),
         0px 2.2px 2.5px -0.4px rgba(3, 2, 2, 0.02),
         0px 4.3px 4.8px -0.8px rgba(3, 2, 2, 0.02),
@@ -63,12 +64,12 @@ const config: Config = {
         0px 21px 23.6px -2.1px rgba(3, 2, 2, 0.02),
         0px 33.2px 37.4px -2.5px rgba(3, 2, 2, 0.02)`,
         'elevation-sm': `
-        inset 0.25px 1px 1px 0 ${theme('colors.rose.200 / 1.5%')},
+        inset 0.25px 1px 1px 0 ${theme('colors.slate.600 / 1.5%')},
         0.3px 0.5px 0.7px rgba(3, 2, 2, 0.2),
         0.4px 0.8px 1px -1.2px rgba(3, 2, 2, 0.2),
         1px 2px 2.5px -2.5px rgba(3, 2, 2, 0.2);`,
         'elevation-md': `
-        inset 0.25px 1px 1px 0 ${theme('colors.rose.200 / 3%')},
+        inset 0.25px 1px 1px 0 ${theme('colors.slate.600 / 3%')},
         0.3px 0.5px 0.7px rgba(3, 2, 2, 0.1),
         0.8px 1.6px 2px -0.8px rgba(3, 2, 2, 0.1),
         2.1px 4.1px 5.2px -1.7px rgba(3, 2, 2, 0.1),
@@ -90,6 +91,7 @@ const config: Config = {
   },
   plugins: [
     tailwinScrollbar({ nocompatible: true }),
+    headlesssUi({ prefix: 'ui' }),
     plugin(function ({ addUtilities }) {
       addUtilities({
         '.icon': {

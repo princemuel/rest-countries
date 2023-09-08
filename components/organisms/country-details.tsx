@@ -67,7 +67,7 @@ export const CountryDetails = async ({ slug }: Props) => {
             <div className='flex flex-1 flex-col gap-2'>
               <dl className='flex flex-row gap-2'>
                 <dt className='whitespace-pre font-semibold'>Native Name:</dt>
-                <dd className='font-light'>
+                <dd className='font-light' style={{ textWrap: 'balance' }}>
                 {lf.format(
                   (Object.values(nativeNameArr || {}) || []).map(
                     (name) => name
@@ -120,7 +120,7 @@ export const CountryDetails = async ({ slug }: Props) => {
 
               <dl className='flex flex-row gap-2'>
                 <dt className='font-semibold'>Languages:</dt>
-                <dd className='whitespace-pre font-light'>
+                <dd className='whitespace-pre font-light' style={{ textWrap: 'balance' }}>
                   {lf.format(Object.values(country?.languages || {}) || [])}
                 </dd>
               </dl>

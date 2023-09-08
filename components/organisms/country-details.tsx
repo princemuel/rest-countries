@@ -18,13 +18,6 @@ export const CountryDetails = async ({ slug }: Props) => {
   const country = response[0];
   const blurDataUrl = await toBase64(country.flags.svg);
 
-  //created a set of native names to avoid repetition
-  // const nativeNameList = Object.values(country?.name?.nativeName);
-  const nativeNameList = Object.values((country?.name?.nativeName) || {})
-  const nativeNameSet = new Set();     
-  nativeNameList.forEach((obj)=>nativeNameSet.add(obj?.common))
-  const nativeNameArr = Array.from(nativeNameSet);
-
   const borders = await Promise.all(
     (country?.borders ?? []).map(async (border) => {
       try {
@@ -35,6 +28,12 @@ export const CountryDetails = async ({ slug }: Props) => {
       }
     })
   );
+
+  const nativeNameList = new Set<string>(
+    Object.values(country?.name?.nativeName || {}).map((name) => name?.common)
+  );
+
+  const nativeNames = Array.from(nativeNameList);
 
   return (
     <article>
@@ -67,7 +66,7 @@ export const CountryDetails = async ({ slug }: Props) => {
               <dl className='flex flex-row gap-2'>
                 <dt className='whitespace-pre font-semibold'>Native Name:</dt>
                 <dd className='font-light' style={{ textWrap: 'balance' }}>
-                {lf.format((nativeNameArr).map((name) => name))}       
+                  {lf.format(nativeNames)}
                 </dd>
               </dl>
 
@@ -115,7 +114,10 @@ export const CountryDetails = async ({ slug }: Props) => {
 
               <dl className='flex flex-row gap-2'>
                 <dt className='font-semibold'>Languages:</dt>
-                <dd className='whitespace-pre font-light' style={{ textWrap: 'balance' }}>
+                <dd
+                  className='whitespace-pre font-light'
+                  style={{ textWrap: 'balance' }}
+                >
                   {lf.format(Object.values(country?.languages || {}) || [])}
                 </dd>
               </dl>

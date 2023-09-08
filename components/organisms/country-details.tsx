@@ -120,7 +120,7 @@ export const CountryDetails = async ({ slug }: Props) => {
 
               <dl className='flex flex-row gap-2'>
                 <dt className='font-semibold'>Languages:</dt>
-                <dd className='whitespace-pre font-light hyphens-auto'>
+                <dd className='whitespace-pre font-light'>
                   {lf.format(Object.values(country?.languages || {}) || [])}
                 </dd>
               </dl>

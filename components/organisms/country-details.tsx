@@ -19,11 +19,10 @@ export const CountryDetails = async ({ slug }: Props) => {
   const blurDataUrl = await toBase64(country.flags.svg);
 
   //created a set of native names to avoid repetition
-  const nativeNameList = Object.values(country?.name?.nativeName);
+  // const nativeNameList = Object.values(country?.name?.nativeName);
+  const nativeNameList = Object.values((country?.name?.nativeName) || {})
   const nativeNameSet = new Set();     
-  nativeNameList.forEach((obj)=>
-    nativeNameSet.add(obj?.common)
-  )
+  nativeNameList.forEach((obj)=>nativeNameSet.add(obj?.common))
   const nativeNameArr = Array.from(nativeNameSet);
 
   const borders = await Promise.all(
@@ -68,11 +67,7 @@ export const CountryDetails = async ({ slug }: Props) => {
               <dl className='flex flex-row gap-2'>
                 <dt className='whitespace-pre font-semibold'>Native Name:</dt>
                 <dd className='font-light' style={{ textWrap: 'balance' }}>
-                {lf.format(
-                  (Object.values(nativeNameArr || {}) || []).map(
-                    (name) => name
-                  )
-                )}       
+                {lf.format((nativeNameArr).map((name) => name))}       
                 </dd>
               </dl>
 

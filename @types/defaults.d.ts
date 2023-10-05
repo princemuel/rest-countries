@@ -29,5 +29,5 @@ interface IParams {
 }
 
 interface CSSStyleProps extends React.CSSProperties {
-  "--min-column-size": string;
+  "--min-col-size": string;
 }

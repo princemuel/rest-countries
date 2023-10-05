@@ -94,3 +94,20 @@ export function useFilterDispatch() {
 
   return context;
 }
+
+////////////////////////////////
+////////////////////////////////
+///// ACTION CREATORS
+////////////////////////////////
+////////////////////////////////
+
+type FilterDispatch = ReturnType<typeof useFilterDispatch>;
+
+export function search(dispatch: FilterDispatch, payload: string) {
+  dispatch({ type: 'SET_SEARCH_TERM', payload });
+  dispatch({ type: 'SEARCH', payload });
+}
+export function filter(dispatch: FilterDispatch, payload: string) {
+  dispatch({ type: 'SET_FILTER_TERM', payload });
+  dispatch({ type: 'FILTER', payload });
+}

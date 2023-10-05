@@ -16,7 +16,7 @@ interface Props {
 export const CountryDetails = async ({ slug }: Props) => {
   const response = (await getCountryBySlug(slug)) || [];
   const country = response[0];
-  const blurDataUrl = await toBase64(country.flags.svg);
+  const blurDataUrl = await toBase64(country?.flags?.svg);
 
   const borders = await Promise.all(
     (country?.borders ?? []).map(async (border) => {
@@ -24,6 +24,8 @@ export const CountryDetails = async ({ slug }: Props) => {
         const response = await getCountryBySlug(border);
         return response[0];
       } catch (error) {
+        console.log(error);
+
         return null;
       }
     })
@@ -40,8 +42,8 @@ export const CountryDetails = async ({ slug }: Props) => {
       <div className='flex flex-col flex-wrap gap-16 md:flex-row md:gap-10 lg:gap-20'>
         <figure className='overflow-hidden rounded-xl'>
           <NextImage
-            src={country?.flags?.svg}
-            alt={country?.flags?.alt || ''}
+            src={country?.flags?.svg || ''}
+            alt={country?.flags?.alt ?? `The country's flag`}
             width={672}
             height={378}
             style={{ height: 'auto' }}
@@ -49,7 +51,7 @@ export const CountryDetails = async ({ slug }: Props) => {
             className='aspect-video rounded-xl object-cover'
             priority={true}
             blurDataURL={blurDataUrl}
-            placeholder='blur'
+            placeholder={blurDataUrl ? 'blur' : 'empty'}
           />
           <figcaption className='sr-only'>{country?.name?.official}</figcaption>
         </figure>
@@ -65,9 +67,7 @@ export const CountryDetails = async ({ slug }: Props) => {
             <div className='flex flex-1 flex-col gap-2'>
               <dl className='flex flex-row gap-2'>
                 <dt className='whitespace-pre font-semibold'>Native Name:</dt>
-                <dd className='font-light' style={{ textWrap: 'balance' }}>
-                  {lf.format(nativeNames)}
-                </dd>
+                <dd className='font-light'>{lf.format(nativeNames)}</dd>
               </dl>
 
               <dl className='flex flex-row gap-2'>
@@ -114,10 +114,7 @@ export const CountryDetails = async ({ slug }: Props) => {
 
               <dl className='flex flex-row gap-2'>
                 <dt className='font-semibold'>Languages:</dt>
-                <dd
-                  className='whitespace-pre font-light'
-                  style={{ textWrap: 'balance' }}
-                >
+                <dd className='whitespace-pre font-light'>
                   {lf.format(Object.values(country?.languages || {}) || [])}
                 </dd>
               </dl>
@@ -149,7 +146,7 @@ export const CountryDetails = async ({ slug }: Props) => {
                 Border Countries:
               </dt>
 
-              <React.Suspense fallback={<div>Loading..</div>}>
+              <React.Suspense fallback={<div>Loading...</div>}>
                 <div className='flex flex-wrap gap-3'>
                   {hasValues(borders) ? (
                     borders?.map((border) => {

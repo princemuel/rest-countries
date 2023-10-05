@@ -2,11 +2,11 @@ import { getPlaiceholder } from 'plaiceholder';
 import { cache } from 'react';
 import 'server-only';
 
-export const preloadBase64 = (slug: string) => {
+export const preloadBase64 = (slug = '') => {
   void toBase64(slug);
 };
 
-export const toBase64 = cache(async (imageUrl: string) => {
+export const toBase64 = cache(async (imageUrl = '') => {
   try {
     const response = await fetch(imageUrl);
     if (!response.ok) {
@@ -22,8 +22,11 @@ export const toBase64 = cache(async (imageUrl: string) => {
   } catch (exception) {
     if (exception instanceof Error) console.log(exception.stack);
     else console.log(exception);
-    return typeof window === 'undefined'
-      ? Buffer.from(imageUrl).toString('base64')
-      : window?.btoa(imageUrl);
+    const base64 =
+      typeof window === 'undefined'
+        ? Buffer.from(imageUrl).toString('base64')
+        : window?.btoa(imageUrl);
+
+    return base64 ?? '';
   }
 });

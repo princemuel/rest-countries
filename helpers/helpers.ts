@@ -24,6 +24,14 @@ export function hasValues<T>(
 }
 
 /*---------------------------------*
+            FUNCTION UTILS          *
+  ---------------------------------*
+ */
+
+export const logg = (...values: Parameters<Console['log']>) =>
+  process.env.NODE_ENV === 'development' ? console.log(...values) : undefined;
+
+/*---------------------------------*
             BROWSER UTILS          *
   ---------------------------------*
  */

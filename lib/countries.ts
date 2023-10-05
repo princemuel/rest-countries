@@ -9,7 +9,11 @@ export const preloadCountries = () => {
 };
 
 export const getAllCountries = cache(async (): Promise<CountryType[]> => {
-  const response = await fetch(url);
-
-  return response.json();
+  try {
+    const response = await fetch(url);
+    return response.json();
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 });

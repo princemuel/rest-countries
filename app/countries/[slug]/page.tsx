@@ -1,3 +1,5 @@
+import { defineMeta } from '@/config';
+import { hasValues } from '@/helpers';
 import {
   getAllCountries,
   getCountryBySlug,
@@ -5,6 +7,7 @@ import {
   preloadCountry,
 } from '@/lib';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import CountryDetailsTemplate from './country';
 
 interface Props {
@@ -16,7 +19,9 @@ async function PageRoute({ params: { slug } }: Props) {
 
   const imageResponse = await getCountryBySlug(slug);
 
-  preloadBase64(imageResponse[0].flags.svg);
+  if (!imageResponse || !hasValues(imageResponse)) throw notFound();
+
+  preloadBase64(imageResponse[0]?.flags?.svg);
 
   return <CountryDetailsTemplate slug={slug} />;
 }
@@ -35,16 +40,17 @@ export async function generateMetadata({
   const response = await getCountryBySlug(slug);
 
   const country = response[0];
+  if (!country) throw notFound();
 
-  if (!country)
-    return {
-      title: 'Country Not Found',
-      description: 'The requested resource does not exist',
-    };
+  // if (!country)
+  //   return {
+  //     title: 'Country Not Found',
+  //     description: 'The requested resource does not exist',
+  //   };
 
   const title = `${country?.name?.common} `;
 
-  return {
+  return defineMeta({
     title: title,
     description: country?.flags?.alt,
     icons: [
@@ -70,5 +76,5 @@ export async function generateMetadata({
       description: country?.flags?.alt,
       images: [country?.flags?.png, country?.flags?.svg],
     },
-  };
+  });
 }

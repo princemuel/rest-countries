@@ -9,9 +9,7 @@ export const preloadCountry = (slug = '') => {
 export const getCountryBySlug = cache(
   async (slug = ''): Promise<CountryType[]> => {
     try {
-      const url = `${REST_COUNTRIES_API}/alpha/${slug}`;
-
-      const response = await fetch(url);
+      const response = await fetch(`${REST_COUNTRIES_API}/alpha/${slug}`);
 
       return response.json();
     } catch (error) {

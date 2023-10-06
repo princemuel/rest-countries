@@ -7,8 +7,8 @@ export async function request<JSON = any>(
     const json = await response.json();
 
     let error: FetchError;
-    if (json?.error) {
-      error = new Error(json.error);
+    if (json?.error || json?.message) {
+      error = new Error(json.error ?? json.message);
       error.status = response.status;
     } else {
       error = new Error('Network response was not ok');

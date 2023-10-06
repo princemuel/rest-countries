@@ -7,14 +7,9 @@ import * as React from 'react';
 export function ThemeSwitch() {
   const { resolvedTheme, setTheme } = useTheme();
   const [_, startTransition] = React.useTransition();
-  const hasMounted = React.useRef(false);
+  const [hasMounted, setHasMounted] = React.useState(false);
 
-  React.useEffect(() => {
-    hasMounted.current = true;
-    return () => {
-      hasMounted.current = false;
-    };
-  }, []);
+  React.useEffect(() => setHasMounted(true), []);
 
   const isDarkTheme = resolvedTheme === 'dark';
 
@@ -26,7 +21,7 @@ export function ThemeSwitch() {
 
   const text = isDarkTheme ? 'dark mode' : 'light mode';
 
-  if (!hasMounted.current) return null;
+  if (!hasMounted) return null;
 
   return (
     <button

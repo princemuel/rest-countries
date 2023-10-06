@@ -1,6 +1,11 @@
 'use client';
 
-import { useCountries, useFilterDispatch, useFilterState } from '@/context';
+import {
+  filter,
+  useCountries,
+  useFilterDispatch,
+  useFilterState,
+} from '@/context';
 import { cn } from '@/helpers';
 import { Listbox, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from 'lucide-react';
@@ -27,8 +32,7 @@ export function FilterForm() {
       name='current-choice'
       onChange={(value) => {
         startTransition(() => {
-          dispatch({ type: 'SET_FILTER_TERM', payload: value });
-          dispatch({ type: 'FILTER', payload: value });
+          filter(dispatch, value);
         });
       }}
     >

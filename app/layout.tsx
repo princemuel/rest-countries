@@ -1,12 +1,12 @@
 import { BaseLayout } from '@/components';
-import { seo } from '@/config';
+import { defineMeta } from '@/config';
 import { Providers } from '@/context';
 import { cn } from '@/helpers';
 import { Analytics } from '@vercel/analytics/react';
 import { fonts } from './fonts';
 import './globals.css';
 
-export const metadata = seo;
+export const metadata = defineMeta();
 
 export default function RootLayout({
   children,

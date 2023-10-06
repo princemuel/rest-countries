@@ -1,8 +1,5 @@
 export const REST_COUNTRIES_API =
   process.env.NEXT_PUBLIC_COUNTRIES_BASE_URL || '';
-export const SITE_URL =
-  process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
-export const baseUrl = new URL('/', SITE_URL);
 
 // Set default sizing to control aspect ratio which will scale responsively but also help avoid layout shifts
 export const DEFAULT_MAP_WIDTH = 640;

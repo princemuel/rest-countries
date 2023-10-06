@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { FilterProvider } from '.';
+import { FilterProvider } from './filters';
 
 const CountriesContext = React.createContext<Promise<CountryType[]> | null>(
   null

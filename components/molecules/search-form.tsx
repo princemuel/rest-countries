@@ -1,6 +1,6 @@
 'use client';
 
-import { useFilterDispatch, useFilterState } from '@/context';
+import { search, useFilterDispatch, useFilterState } from '@/context';
 import { SearchIcon } from 'lucide-react';
 import { useTransition } from 'react';
 
@@ -11,8 +11,7 @@ export function SearchForm() {
 
   function handleSearch(e: ReactInputEvent) {
     startTransition(() => {
-      dispatch({ type: 'SET_SEARCH_TERM', payload: e.target.value });
-      dispatch({ type: 'SEARCH', payload: e.target.value });
+      search(dispatch, e.target.value);
     });
   }
 

@@ -1,10 +1,21 @@
 import { cn } from '@/helpers';
+import { Nunito_Sans } from 'next/font/google';
 import localFont from 'next/font/local';
 
-const FontSans = localFont({
+const isProduction = process.env.NODE_ENV === 'production';
+
+const FontSans_DEV = localFont({
   display: 'swap',
   variable: '--font-sans',
   src: './nunito-sans.ttf',
 });
 
-export const fonts = cn(FontSans.variable);
+const FontSans_PROD = Nunito_Sans({
+  display: 'swap',
+  variable: '--font-sans',
+  subsets: ['latin'],
+});
+
+export const fonts = cn(
+  isProduction ? [FontSans_PROD.variable] : [FontSans_DEV.variable]
+);

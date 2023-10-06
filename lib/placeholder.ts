@@ -7,12 +7,16 @@ export const preloadBlurDataUrls = (images: Photo[]) => {
 };
 
 export const blurDataUrls = cache(async (images: Photo[]) => {
-  const base64Promises = images.map((image) => toBase64(image.url));
+  try {
+    const base64Promises = images.map((image) => toBase64(image.url));
 
-  const base64Results = await Promise.all(base64Promises);
-
-  return images.map((image, idx) => {
-    image.blurredDataUrl = base64Results[idx];
-    return image;
-  });
+    const base64Results = await Promise.all(base64Promises);
+    return (images || []).map((image, idx) => {
+      image.blurredDataUrl = base64Results[idx];
+      return image;
+    });
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 });

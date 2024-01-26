@@ -1,4 +1,5 @@
 import { Container, CountriesList, Filters } from '@/components';
+import LoadingCountries from '@/components/organisms/skelenton';
 import { Suspense } from 'react';
 
 const HomepageTemplate = () => {
@@ -12,7 +13,7 @@ const HomepageTemplate = () => {
 
       <section>
         <Container>
-          <Suspense fallback={<div>Loading..</div>}>
+          <Suspense fallback={<LoadingCountries />}>
             <CountriesList />
           </Suspense>
         </Container>

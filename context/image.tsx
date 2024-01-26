@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
 const ImageContext = React.createContext<Promise<string> | null>(null);
 
@@ -18,7 +18,7 @@ export const ImageProvider = ({ children, promise }: Props) => {
 export function useImage() {
   const context = React.useContext(ImageContext);
   if (context == null)
-    throw new Error('The `useImage` hook must be used in a `ImageProvider`');
+    throw new Error("The `useImage` hook must be used in a `ImageProvider`");
 
   return context;
 }

@@ -1,14 +1,14 @@
-import { defineMeta } from '@/config';
-import { hasValues } from '@/helpers';
+import { defineMeta } from "@/config";
+import { hasValues } from "@/helpers";
 import {
   getAllCountries,
   getCountryBySlug,
   preloadBase64,
   preloadCountry,
-} from '@/lib';
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import CountryDetailsTemplate from './country';
+} from "@/lib";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import CountryDetailsTemplate from "./country";
 
 interface Props {
   params: IParams;
@@ -55,20 +55,20 @@ export async function generateMetadata({
     description: country?.flags?.alt,
     icons: [
       country?.flags.svg,
-      { rel: 'icon', url: country?.flags?.png },
-      { rel: 'apple-touch-icon', url: country?.flags?.png },
+      { rel: "icon", url: country?.flags?.png },
+      { rel: "apple-touch-icon", url: country?.flags?.png },
     ],
     openGraph: {
-      type: 'article',
+      type: "article",
       title: title,
       description: country?.flags?.alt,
       authors: [
-        'Rest Countries',
-        'https://restcountries.com/',
-        'Prince Muel',
-        'https://princemuel.vercel.app/',
+        "Rest Countries",
+        "https://restcountries.com/",
+        "Prince Muel",
+        "https://princemuel.vercel.app/",
       ],
-      publishedTime: new Date('2023-08-12').toISOString(),
+      publishedTime: new Date("2023-08-12").toISOString(),
       images: country?.flags?.png,
     },
     twitter: {

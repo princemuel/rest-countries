@@ -1,11 +1,11 @@
-import { CountriesProvider, ImagesProvider } from '@/context';
+import { CountriesProvider, ImagesProvider } from "@/context";
 import {
   blurDataUrls,
   getAllCountries,
   preloadBlurDataUrls,
   preloadCountries,
-} from '@/lib';
-import HomepageTemplate from './home';
+} from "@/lib";
+import HomepageTemplate from "./home";
 
 async function PageRoute() {
   preloadCountries();
@@ -15,7 +15,7 @@ async function PageRoute() {
     cca3: response?.cca3,
     url: response?.flags?.svg,
     alt: response?.flags?.alt,
-    blurredDataUrl: '',
+    blurredDataUrl: "",
   }));
 
   preloadBlurDataUrls(images);

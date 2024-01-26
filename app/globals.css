@@ -5,27 +5,26 @@
 @layer base {
   html {
     box-sizing: border-box;
-    /* font-size: 62.5%; */
     text-rendering: optimizeSpeed;
     text-size-adjust: none;
   }
-  /* @media (min-width: 112.5em) {
-    html {
-      font-size: 75%;
-    }
-  } */
+
+  *,
+  *::after,
+  *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font: inherit;
+  }
 
   :where(body) {
     min-block-size: 100vh;
+    min-block-size: 100svh;
     line-height: 1.5;
-    text-rendering: optimizeSpeed;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
-    position: relative;
   }
 
-  :where(a, button, label, select, summary, [role='button'], [role='option']) {
+  :is(a, button, label, select, summary, [role='button'], [role='option']) {
     @apply cursor-pointer;
   }
   :where(textarea) {
@@ -39,15 +38,14 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    :where(html:focus-within) {
+    :where(html) {
       scroll-behavior: smooth;
-      /* scroll-behavior: auto; */
     }
   }
 
   /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
   @media (prefers-reduced-motion: reduce) {
-    html:focus-within {
+    :where(html) {
       scroll-behavior: auto;
     }
     *,

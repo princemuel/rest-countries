@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { MoonIcon } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import * as React from 'react';
+import { MoonIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+import * as React from "react";
 
 export function ThemeSwitch() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -11,25 +11,25 @@ export function ThemeSwitch() {
 
   React.useEffect(() => setHasMounted(true), []);
 
-  const isDarkTheme = resolvedTheme === 'dark';
+  const isDarkTheme = resolvedTheme === "dark";
 
   const updateTheme = React.useCallback(() => {
     startTransition(() => {
-      setTheme(isDarkTheme ? 'light' : 'dark');
+      setTheme(isDarkTheme ? "light" : "dark");
     });
   }, [isDarkTheme, setTheme]);
 
-  const text = isDarkTheme ? 'dark mode' : 'light mode';
+  const text = isDarkTheme ? "dark mode" : "light mode";
 
   if (!hasMounted) return null;
 
   return (
     <button
-      data-theme='light'
-      className='flex items-center gap-1 text-sm capitalize'
+      data-theme="light"
+      className="flex items-center gap-1 text-sm capitalize"
       onClick={updateTheme}
     >
-      <MoonIcon fill='white' size={14} strokeWidth={2} />
+      <MoonIcon fill="white" size={14} strokeWidth={2} />
       <span>{text}</span>
     </button>
   );

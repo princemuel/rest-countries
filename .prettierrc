@@ -1,22 +1,27 @@
 {
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
   "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+
+  "requirePragma": false,
   "endOfLine": "lf",
   "htmlWhitespaceSensitivity": "css",
   "embeddedLanguageFormatting": "auto",
-  "bracketSameLine": false,
-  "printWidth": 80,
-  "quoteProps": "as-needed",
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "tabWidth": 2,
-  "arrowParens": "always",
-  "semi": true,
-  "jsxBracketSameLine": false,
-  "jsxSingleQuote": true,
-  "useTabs": false,
+  "singleAttributePerLine": false,
+
+  "experimentalTernaries": false,
 
   "tailwindConfig": "./tailwind.config.ts",
-  "tailwindFunctions": ["cn", "cva"],
+  "tailwindFunctions": ["tw", "cn", "tv", "cva"],
   "tailwindAttributes": ["tw"],
+
   "plugins": ["prettier-plugin-tailwindcss"]
 }

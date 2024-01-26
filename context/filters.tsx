@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
 interface State {
   countries: CountryType[];
@@ -9,10 +9,10 @@ interface State {
   filtered: CountryType[];
 }
 type Action =
-  | { type: 'SEARCH'; payload: string }
-  | { type: 'FILTER'; payload: string }
-  | { type: 'SET_SEARCH_TERM'; payload: string }
-  | { type: 'SET_FILTER_TERM'; payload: string };
+  | { type: "SEARCH"; payload: string }
+  | { type: "FILTER"; payload: string }
+  | { type: "SET_SEARCH_TERM"; payload: string }
+  | { type: "SET_FILTER_TERM"; payload: string };
 
 const FilterStateContext = React.createContext<State | null>(null);
 const FilterDispatchContext =
@@ -20,31 +20,31 @@ const FilterDispatchContext =
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
-    case 'SET_SEARCH_TERM':
+    case "SET_SEARCH_TERM":
       return {
         ...state,
         searchTerm: action.payload,
       };
-    case 'SET_FILTER_TERM':
+    case "SET_FILTER_TERM":
       return {
         ...state,
         filterTerm: action.payload,
       };
 
-    case 'SEARCH': {
+    case "SEARCH": {
       const countries = Boolean(action.payload)
         ? state.filtered.filter((country) => {
-            return RegExp(`${action.payload}`, 'ig').test(country?.name.common);
+            return RegExp(`${action.payload}`, "ig").test(country?.name.common);
           })
         : state.countries;
       return { ...state, filtered: countries };
     }
 
-    case 'FILTER': {
+    case "FILTER": {
       const countries =
-        action.payload.toLowerCase() !== 'all'
+        action.payload.toLowerCase() !== "all"
           ? state.countries.filter((country) => {
-              return new RegExp(`${action.payload}`, 'ig').test(country.region);
+              return new RegExp(`${action.payload}`, "ig").test(country.region);
             })
           : state.countries;
       return { ...state, filtered: countries };
@@ -63,8 +63,8 @@ interface Props {
 export const FilterProvider = ({ children, value }: Props) => {
   const [state, dispatch] = React.useReducer(reducer, {
     countries: value,
-    searchTerm: '',
-    filterTerm: 'All',
+    searchTerm: "",
+    filterTerm: "All",
     filtered: value,
   } satisfies State);
 
@@ -80,7 +80,7 @@ export const FilterProvider = ({ children, value }: Props) => {
 export function useFilterState() {
   const context = React.useContext(FilterStateContext);
   if (context == null)
-    throw new Error('The `useFilter` hook must be used in a `FilterProvider`');
+    throw new Error("The `useFilter` hook must be used in a `FilterProvider`");
 
   return context;
 }
@@ -89,7 +89,7 @@ export function useFilterDispatch() {
   const context = React.useContext(FilterDispatchContext);
   if (context == null)
     throw new Error(
-      'The `useFilterDispatch` hook must be used in a `FilterProvider`'
+      "The `useFilterDispatch` hook must be used in a `FilterProvider`",
     );
 
   return context;
@@ -104,10 +104,10 @@ export function useFilterDispatch() {
 type FilterDispatch = ReturnType<typeof useFilterDispatch>;
 
 export function search(dispatch: FilterDispatch, payload: string) {
-  dispatch({ type: 'SET_SEARCH_TERM', payload });
-  dispatch({ type: 'SEARCH', payload });
+  dispatch({ type: "SET_SEARCH_TERM", payload });
+  dispatch({ type: "SEARCH", payload });
 }
 export function filter(dispatch: FilterDispatch, payload: string) {
-  dispatch({ type: 'SET_FILTER_TERM', payload });
-  dispatch({ type: 'FILTER', payload });
+  dispatch({ type: "SET_FILTER_TERM", payload });
+  dispatch({ type: "FILTER", payload });
 }

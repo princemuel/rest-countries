@@ -9,9 +9,9 @@ interface Props {
 export function Providers({ children }: Props) {
   return (
     <NextThemesProvider
-      attribute='data-theme'
-      storageKey='page-theme'
-      defaultTheme='system'
+      attribute="data-darkreader-theme"
+      storageKey="rc-theme"
+      defaultTheme="system"
       enableSystem={true}
     >
       {children}

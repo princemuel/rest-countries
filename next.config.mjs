@@ -9,10 +9,6 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
-  experimental: {
-    serverActions:true
-  },
-
   webpack(config) {
     config.plugins.push(
       new CopyPlugin({
@@ -26,7 +22,6 @@ const nextConfig = {
     );
     return config;
   },
-  reactStrictMode: true,
 
   images: {
     formats: ['image/avif', 'image/webp'],

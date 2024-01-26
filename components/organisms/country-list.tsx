@@ -1,17 +1,13 @@
-'use client';
+"use client";
 
-import { useFilterState, useImages } from '@/context';
-import * as React from 'react';
-import { CountryCard } from '../molecules';
+import { useFilterState, useImages } from "@/context";
+import * as React from "react";
+import { CountryCard } from "../molecules";
 
 const CountriesList = () => {
-  // unwrap the promise
-  const imagesPromise = useImages();
-  const images = React.use(imagesPromise);
-
+  const images = React.use(useImages());
   const state = useFilterState();
 
-  //TODO! refactor this later to use a state selector
   const sorted = React.useMemo(() => {
     return (
       state.filtered.sort((countryA, countryB) => {
@@ -22,20 +18,11 @@ const CountriesList = () => {
     );
   }, [state.filtered]);
 
-  // const map = new Map();
-  // sorted.forEach((item) => map.set(item.cca3, item));
-  // (images ?? []).forEach((item) =>
-  //   map.set(item.tag, { ...map.get(item.tag), ...item })
-  // );
-  // const mergedArr = Array.from(map.values());
-
-  // console.log(JSON.stringify(mergedArr[0]));
-
   return (
-    <div className='grid gap-8 grid-cols-auto md:gap-8'>
+    <div className="grid gap-8 grid-cols-auto md:gap-8">
       {sorted.map((country) => {
         const flag = (images ?? []).filter(
-          (image) => image.cca3 === country.cca3
+          (image) => image.cca3 === country.cca3,
         )[0];
 
         return (

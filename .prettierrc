@@ -16,7 +16,7 @@
   "useTabs": false,
 
   "tailwindConfig": "./tailwind.config.ts",
-  "tailwindFunctions": ["cn", "cva"],
+  "tailwindFunctions": ["tw", "cva"],
   "tailwindAttributes": ["tw"],
   "plugins": ["prettier-plugin-tailwindcss"]
 }

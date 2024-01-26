@@ -1,17 +1,17 @@
-import { getPlaiceholder } from 'plaiceholder';
-import { cache } from 'react';
-import 'server-only';
+import { getPlaiceholder } from "plaiceholder";
+import { cache } from "react";
+import "server-only";
 
-export const preloadBase64 = (slug = '') => {
+export const preloadBase64 = (slug = "") => {
   void toBase64(slug);
 };
 
-export const toBase64 = cache(async (imageUrl = '') => {
+export const toBase64 = cache(async (imageUrl = "") => {
   try {
     const response = await fetch(imageUrl);
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch image: ${response.status} ${response.statusText}`
+        `Failed to fetch image: ${response.status} ${response.statusText}`,
       );
     }
     const buffer = await response.arrayBuffer();
@@ -23,10 +23,10 @@ export const toBase64 = cache(async (imageUrl = '') => {
     if (exception instanceof Error) console.log(exception.stack);
     else console.log(exception);
     const base64 =
-      typeof window === 'undefined'
-        ? Buffer.from(imageUrl).toString('base64')
+      typeof window === "undefined"
+        ? Buffer.from(imageUrl).toString("base64")
         : window?.btoa(imageUrl);
 
-    return base64 ?? '';
+    return base64 ?? "";
   }
 });

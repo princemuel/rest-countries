@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Header } from '../organisms';
+import * as React from "react";
+import { Header } from "../organisms";
 
 interface Props {
   children: React.ReactNode;

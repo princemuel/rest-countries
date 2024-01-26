@@ -8,13 +8,14 @@ type ElementProps<E extends React.ElementType<any>> = $ElementProps<E> &
 
 interface IconProps extends React.ComponentPropsWithoutRef<"svg"> {}
 
-type PropsFrom<T> = T extends React.FC<infer Props>
-  ? Props
-  : T extends React.Component<infer Props>
-  ? Props
-  : T extends object
-  ? { [K in keyof T]: T[K] }
-  : never;
+type PropsFrom<T> =
+  T extends React.FC<infer Props>
+    ? Props
+    : T extends React.Component<infer Props>
+      ? Props
+      : T extends object
+        ? { [K in keyof T]: T[K] }
+        : never;
 
 /*==============================*
   EVENT TYPES

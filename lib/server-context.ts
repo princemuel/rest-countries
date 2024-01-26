@@ -1,5 +1,5 @@
-import { cache } from 'react';
-import 'server-only';
+import { cache } from "react";
+import "server-only";
 
 /**
  * This is named like so to avoid a clash

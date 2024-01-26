@@ -1,3 +1,3 @@
-export * from './baseurl';
-export * from './constants.config';
-export * from './seo.config';
+export * from "./baseurl";
+export * from "./constants.config";
+export * from "./seo.config";

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
 const CountryContext = React.createContext<Promise<CountryType[]> | null>(null);
 
@@ -21,7 +21,7 @@ export function useCountry() {
   const context = React.useContext(CountryContext);
   if (context == null)
     throw new Error(
-      'The `useCountry` hook must be used in a `CountryProvider`'
+      "The `useCountry` hook must be used in a `CountryProvider`",
     );
 
   return context;

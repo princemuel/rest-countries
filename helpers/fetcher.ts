@@ -11,19 +11,19 @@ export async function request<JSON = any>(
       error = new Error(json.error ?? json.message);
       error.status = response.status;
     } else {
-      error = new Error('Network response was not ok');
+      error = new Error("Network response was not ok");
     }
 
     // doubly make sure error is not undefined
     return Promise.reject(
-      error || new Error('An unexpected error occurred. Please try again')
+      error || new Error("An unexpected error occurred. Please try again"),
     );
   }
 
-  const type = response.headers.get('content-type');
-  if (type !== 'application/json') {
+  const type = response.headers.get("content-type");
+  if (type !== "application/json") {
     return Promise.reject(
-      new TypeError(`Malformed data! Expected 'JSON', got '${type}'`)
+      new TypeError(`Malformed data! Expected 'JSON', got '${type}'`),
     );
   }
 

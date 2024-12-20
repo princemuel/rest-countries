@@ -19,7 +19,6 @@
 
   "experimentalTernaries": false,
 
-  "tailwindConfig": "./tailwind.config.ts",
   "tailwindFunctions": ["tw", "cn", "tv", "cva"],
   "tailwindAttributes": ["tw"],
 

@@ -5,13 +5,12 @@
   "editor.fontFamily": "'Cascadia Code', 'Droid Sans Mono', 'monospace', monospace",
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
-    "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit",
     "source.addMissingImports": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.formatOnSaveMode": "file",
   "editor.inlineSuggest.enabled": true,
   "editor.tabSize": 2,
   "editor.wordWrap": "bounded",
@@ -43,7 +42,7 @@
   "workbench.tree.indent": 8,
   "astro.content-intellisense": true,
   "prettier.documentSelectors": ["**/*.astro"],
-  "prettier.experimentalTernaries": true,
+  "prettier.experimentalTernaries": false,
 
   "evenBetterToml.formatter.alignComments": true,
   "evenBetterToml.formatter.alignEntries": true,

@@ -4,6 +4,7 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist", ".netlify", "**/ignored/*"],
   "compilerOptions": {
+    "allowJs": true,
     "noErrorTruncation": true,
     "exactOptionalPropertyTypes": false,
     "baseUrl": ".",

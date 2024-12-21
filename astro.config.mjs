@@ -6,13 +6,13 @@ import { loadEnv } from "vite";
 import vercel from "@astrojs/vercel";
 
 const mode = process.env.NODE_ENV ?? "production";
-const environmentVariables = loadEnv(mode, process.cwd(), "");
+const envVars = loadEnv(mode, process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
   output: "static",
   srcDir: "./app",
-  site: environmentVariables.PUBLIC_SITE_URL ?? "",
+  site: envVars.PUBLIC_SITE_URL ?? "",
   env: { validateSecrets: true, schema: {} },
   adapter: vercel(),
   experimental: {

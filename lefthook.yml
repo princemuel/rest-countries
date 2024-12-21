@@ -32,4 +32,4 @@ pre-commit:
 post-merge:
   commands:
     install-packages:
-      run: npm install
+      run: pnpm install --prefer-offline

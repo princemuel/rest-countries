@@ -7,7 +7,7 @@ pre-push:
   commands:
     format:
       glob: "**/*"
-      run: pnpm dlx eslint --fix --no-error-on-unmatched-pattern --color {push_files}
+      run: pnpm dlx eslint --fix --no-error-on-unmatched-pattern --no-color {push_files}
 
 commit-msg:
   commands:

@@ -1,47 +1,64 @@
 {
-  "editor.tabSize": 2,
-
-  "editor.inlineSuggest.enabled": true,
-  "editor.wordWrapColumn": 72,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.addMissingImports": "explicit",
-    "source.fixAll": "explicit"
-  },
-  "eslint.codeAction.showDocumentation": {
-    "enable": true
-  },
-
-  "tailwindCSS.rootFontSize": 16,
-  "tailwindCSS.includeLanguages": {
-    "plaintext": "html"
-  },
-  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "dotenv.enableAutocloaking": false,
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-
-  "workbench.colorCustomizations": {
-    "[Night Wolf (black) (No Italics)]": {
-      "activityBar.border": "#292929"
-    },
-    "[Night Owl]": {
-      "activityBar.background": "#000C1D",
-      "activityBar.border": "#102a44",
-      "editorGroup.border": "#102a44",
-      "sideBar.background": "#001122",
-      "sideBar.border": "#102a44",
-      "sideBar.foreground": "#8BADC1"
-    },
-    "[Night Owl (No Italics)]": {
-      "activityBar.background": "#000C1D",
-      "activityBar.border": "#102a44",
-      "editorGroup.border": "#102a44",
-      "sideBar.background": "#001122",
-      "sideBar.border": "#102a44",
-      "sideBar.foreground": "#8BADC1"
-    }
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.fontSize": 13,
+  "editor.fontFamily": "'Cascadia Code', 'Droid Sans Mono', 'monospace', monospace",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit",
+    "source.addMissingImports": "explicit"
   },
-  "exportall.config.folderListener": ["/components"],
-  "exportall.config.relExclusion": ["/components/atoms/base-map.tsx"]
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.inlineSuggest.enabled": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 88,
+  "emmet.includeLanguages": {
+    "typescriptreact": "html"
+  },
+  "emmet.preferences": {
+    "output.selfClosingStyle": "xhtml"
+  },
+  "mdx.server.enable": false,
+  "biome.enabled": false,
+  "eslint.enable": true,
+  "eslint.useFlatConfig": true,
+  "eslint.format.enable": true,
+  "eslint.validate": ["javascript", "astro", "typescript"],
+  "json.validate.enable": true,
+  "markdown.extension.syntax.plainTheme": true,
+  "material-icon-theme.activeIconPack": "react_redux",
+  "material-icon-theme.folders.theme": "specific",
+  "npm-intellisense.packageSubfoldersIntellisense": true,
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.experimental.classRegex": [
+    ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "window.autoDetectColorScheme": true,
+  "workbench.tree.indent": 8,
+  "astro.content-intellisense": true,
+  "prettier.documentSelectors": ["**/*.astro"],
+  "prettier.experimentalTernaries": false,
+
+  "evenBetterToml.formatter.alignComments": true,
+  "evenBetterToml.formatter.alignEntries": true,
+  "evenBetterToml.formatter.arrayAutoCollapse": true,
+  "evenBetterToml.formatter.arrayAutoExpand": true,
+  "evenBetterToml.formatter.arrayTrailingComma": true,
+  "evenBetterToml.formatter.columnWidth": 88,
+  "evenBetterToml.formatter.reorderArrays": true,
+  "evenBetterToml.formatter.reorderKeys": true,
+  "evenBetterToml.formatter.trailingNewline": true,
+  "evenBetterToml.semanticTokens": true,
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "class:list",
+    "tw"
+  ]
 }

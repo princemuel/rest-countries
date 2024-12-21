@@ -6,8 +6,8 @@
 pre-push:
   commands:
     format:
-      glob: "*.{js,ts,mjs,jsx,tsx,json}"
-      run: npx @biomejs/biome check --write --unsafe --no-errors-on-unmatched --use-editorconfig=true --files-ignore-unknown=true --colors=off {push_files}
+      glob: "**/*"
+      run: pnpm dlx eslint --fix --no-error-on-unmatched-pattern --color {push_files}
 
 commit-msg:
   commands:
@@ -21,11 +21,12 @@ pre-commit:
   parallel: true
   commands:
     lint:
-      glob: "*.{js,ts,mjs,jsx,tsx,json,astro}"
-      run: npx @biomejs/biome check --fix --unsafe --assists-enabled=true --no-errors-on-unmatched --use-editorconfig=true --files-ignore-unknown=true --colors=off {staged_files}
+      glob: "**/*"
+      run: pnpm dlx eslint --fix --no-error-on-unmatched-pattern --color {staged_files}
+      stage_fixed: true
     format:
-      glob: "*.{astro,md,mdx,mdoc,prisma,yml,yaml}"
-      run: npx prettier {staged_files} -w -u --no-error-on-unmatched-pattern --config ./.prettierrc.json --cache
+      glob: "**/*"
+      run: pnpm dlx prettier {staged_files} -w -u --no-error-on-unmatched-pattern --config ./.prettierrc.json --cache
       stage_fixed: true
 
 post-merge:

@@ -89,7 +89,7 @@ function transformCountry(country: any) {
     },
     code: {
       cca2: country?.cca2,
-      cca3: country?.cca3,
+      cca3: country?.cca3?.toLowerCase(),
       ccn3: country?.ccn3,
       cioc: country?.cioc,
     },
@@ -102,26 +102,35 @@ function transformCountry(country: any) {
       region: country?.region,
       subregion: country?.subregion,
       continents: country?.continents,
-      borders: country?.borders || [],
+      borders: (country?.borders ?? []).map((it) => it?.toLowerCase()),
       landlocked: country?.landlocked,
       latlng: country?.latlng,
-      capitalInfo: country?.capitalInfo,
     },
-    capital: country?.capital,
+    capital: { names: country?.capital, latlng: country?.capitalInfo?.latlng },
     languages: country?.languages,
     currencies: Object.entries(country?.currencies ?? {}).map(
-      ([code, { symbol, name }]) => ({ code, symbol, name }),
+      ([code, { symbol, name }]) => ({ code, name, symbol }),
     ),
-    population: country?.population,
+    gini: country?.gini,
     area: country?.area,
+    population: country?.population,
     timezones: country?.timezones,
     tld: country?.tld,
+    status: country?.status,
     independent: country?.independent,
     unMember: country?.unMember,
+    fifa: country?.fifa,
     startOfWeek: country?.startOfWeek,
     car: country?.car,
-    maps: country?.maps,
-    coatOfArms: country?.coatOfArms,
+    maps: Object.entries(country?.maps ?? {}).map(([key, url]) => {
+      let provider = key.replace(/Maps?$/i, "").toLowerCase();
+      if (provider === "openstreet") provider = "openstreetmap";
+      if (provider === "openstreetmap" && !url?.startsWith("http")) {
+        url = "https://www." + url?.replace(/^https?:\/\//, "");
+      }
+      return { provider, url };
+    }),
+    coatOfArms: country?.coatOfArms ?? {},
     postalCode: country?.postalCode,
     idd: country?.idd,
   };

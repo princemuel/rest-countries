@@ -1,8 +1,6 @@
 {
   "dotenv.enableAutocloaking": false,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "editor.fontSize": 13,
-  "editor.fontFamily": "'Cascadia Code', 'Droid Sans Mono', 'monospace', monospace",
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
@@ -26,7 +24,11 @@
   "eslint.enable": true,
   "eslint.useFlatConfig": true,
   "eslint.format.enable": true,
-  "eslint.validate": ["javascript", "astro", "typescript"],
+  "eslint.validate": [
+    "javascript",
+    "astro",
+    "typescript"
+  ],
   "json.validate.enable": true,
   "markdown.extension.syntax.plainTheme": true,
   "material-icon-theme.activeIconPack": "react_redux",
@@ -34,16 +36,20 @@
   "npm-intellisense.packageSubfoldersIntellisense": true,
   "tailwindCSS.emmetCompletions": true,
   "tailwindCSS.experimental.classRegex": [
-    ["tv\\((([^()]*|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    [
+      "tv\\((([^()]*|\\([^()]*\\))*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ]
   ],
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "window.autoDetectColorScheme": true,
   "workbench.tree.indent": 8,
   "astro.content-intellisense": true,
-  "prettier.documentSelectors": ["**/*.astro"],
+  "prettier.documentSelectors": [
+    "**/*.astro"
+  ],
   "prettier.experimentalTernaries": false,
-
   "evenBetterToml.formatter.alignComments": true,
   "evenBetterToml.formatter.alignEntries": true,
   "evenBetterToml.formatter.arrayAutoCollapse": true,

@@ -1,13 +1,16 @@
 ---
+import { actions } from "astro:actions";
 import { Picture } from "astro:assets";
-import { getCollection } from "astro:content";
+
+import { normalize } from "@/utils/strings";
 
 import Fence from "@/components/layout/fence.astro";
 import Shell from "@/components/layout/shell.astro";
 import Link from "@/components/link.astro";
-import { normalize } from "@/utils/strings";
 
-const countries = await getCollection("countries");
+const { data: countries = [], error } = await Astro.callAction(actions.filter, {
+  query: "all",
+});
 ---
 
 <Shell>

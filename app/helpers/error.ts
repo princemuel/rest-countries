@@ -1,10 +1,11 @@
-/** Helper for throwing errors in expression positions */
-export function raise(error: unknown): never {
-  throw typeof error === "string" ? new Error(error) : error;
-}
+import { isString } from "@/utils/guards";
 
-export const parseError = (error: unknown) => {
-  if (error instanceof Error) return error.message;
-  if (typeof error === "string") return error;
+export const throwAsError = (exception: unknown) => {
+  throw isString(exception) ? new Error(exception) : exception;
+};
+
+export const getErrorMessage = (exception: unknown): string => {
+  if (exception instanceof Error) return exception.message;
+  if (isString(exception)) return exception;
   return "An unknown error occurred";
 };

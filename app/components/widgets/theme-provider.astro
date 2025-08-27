@@ -1,0 +1,22 @@
+{/* This is intentionally inlined to avoid FOUC. */}
+<script is:inline>
+  if (!globalThis.Theme) {
+    globalThis.Theme = (() => {
+      const storedTheme =
+        typeof localStorage !== "undefined" && localStorage.getItem("x-theme");
+      const mql = globalThis.matchMedia("(prefers-color-scheme: light)");
+      const theme = storedTheme || (mql.matches ? "light" : "dark");
+      const $ = document.documentElement;
+      $.dataset.colorScheme = theme;
+      return {
+        selectThemeIcon(theme = storedTheme) {
+          const resolvedValue =
+            theme === "light" || theme === "dark" ? theme : "system";
+          const svgs = document.querySelectorAll("theme-picker svg");
+          for (const svg of svgs)
+            svg.dataset.hidden = svg.dataset.id !== `x-${resolvedValue}`;
+        },
+      };
+    })();
+  }
+</script>

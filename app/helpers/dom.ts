@@ -1,38 +1,53 @@
-import { raise } from "./error";
+// eslint-disable func-style
+// eslint-disable max-params
+import { throwAsError } from "@/helpers/error";
 
 /**
- * Find a DOM element and validate its type.
+ * Find a DOM element or elements and validate their types.
  * @example
- * const button = getElement("button", HTMLButtonElement)
+ * // Single element
+ * const button = $("button", HTMLButtonElement)
+ *
+ * // Multiple elements
+ * const buttons = $("button", HTMLButtonElement, document, true)
  */
-export function getElement<E extends Element>(
+export function $<E extends Element>(
+  selector: string,
+  Constructor: new (...args: unknown[]) => E,
+  parent?: ParentNode,
+  multiple?: false,
+): E;
+export function $<E extends Element>(
+  selector: string,
+  Constructor: new (...args: unknown[]) => E,
+  parent?: ParentNode,
+  multiple?: true,
+): NodeListOf<E>;
+
+export function $<E extends Element>(
   selector: string,
   Constructor: new (...args: unknown[]) => E,
   parent: ParentNode = document,
-): E {
-  const element =
-    parent.querySelector(selector) ?? raise(`Element not found: '${selector}'`);
-  if (!(element instanceof Constructor)) {
-    raise(`This element is not of type '${Constructor.name}': '${selector}'`);
-  }
-  return element;
-}
-
-/**
- * Find DOM elements and validate their types.
- * @example
- * const button = getElement("button", HTMLButtonElement)
- */
-export function getElements<E extends Element>(
-  selector: string,
-  Constructor: new (...args: unknown[]) => E,
-  parent: ParentNode = document,
-): NodeListOf<E> {
-  const elements = parent.querySelectorAll(selector);
-  for (const element of elements) {
-    if (!(element instanceof Constructor)) {
-      raise(`This element is not of type '${Constructor.name}': '${selector}'`);
+  multiple = false,
+): E | NodeListOf<E> {
+  if (multiple) {
+    const elements = parent.querySelectorAll(selector);
+    for (const element of elements) {
+      if (!(element instanceof Constructor)) {
+        throwAsError(`Element is not of type ${Constructor.name}: ${selector}`);
+      }
     }
+    return elements as NodeListOf<E>;
   }
-  return elements as NodeListOf<E>;
+
+  const element =
+    parent.querySelector(selector) ?? throwAsError(`Element not found: ${selector}`);
+  if (!(element instanceof Constructor)) {
+    throwAsError(`Element is not of type ${Constructor.name}: ${selector}`);
+  }
+  return element as E;
 }
+
+export const createElement = (name: string, ctor: CustomElementConstructor) => {
+  if (!customElements.get(name)) customElements.define(name, ctor);
+};

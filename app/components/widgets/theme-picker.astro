@@ -1,0 +1,117 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<theme-picker class="contents">
+  <button type="button" title="Toggle Theme" class="text-2xl text-inherit">
+    <span class="sr-only">Toggle theme</span>
+    <Icon
+      data-id="x-light"
+      name="sun"
+      role="presentation"
+      class="transition-colors data-[hidden=true]:hidden"
+      data-hidden="false"
+    />
+    <Icon
+      data-id="x-dark"
+      name="moon"
+      role="presentation"
+      class="transition-colors data-[hidden=true]:hidden"
+      data-hidden="false"
+    />
+    <Icon
+      data-id="x-system"
+      name="system"
+      role="presentation"
+      class="transition-colors data-[hidden=true]:hidden"
+      data-hidden="false"
+    />
+  </button>
+</theme-picker>
+
+{/* Inlined to avoid FOUC. Uses global scope from `theme-provider.astro` */}
+<script is:inline>
+  globalThis.Theme.selectThemeIcon();
+</script>
+
+<script>
+  import { $, createElement } from "@/helpers/dom";
+
+  type Theme = (typeof themes)[number];
+
+  const storageKey = "x-theme";
+
+  const mql = matchMedia("(prefers-color-scheme: light)");
+
+  const themes = ["system", "light", "dark"] as const;
+  /** Yields the next theme value, looping back to the first after reaching the end. */
+  const themeGenerator = (function* () {
+    let index = 0;
+    while (true) {
+      yield themes[index];
+      index = (index + 1) % themes.length;
+    }
+  })();
+
+  const getPreferredColorScheme = (): Theme => (mql.matches ? "light" : "dark");
+  const parseTheme = (theme: unknown): Theme =>
+    theme === "light" || theme === "dark" ? theme : "system";
+
+  const loadTheme = (): Theme =>
+    parseTheme(
+      typeof localStorage !== "undefined" && localStorage.getItem(storageKey),
+    );
+
+  const storeTheme = (theme: Theme) => {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(
+        storageKey,
+        theme === "light" || theme === "dark" ? theme : "",
+      );
+    }
+  };
+
+  /** Update theme widget, document theme, and local storage state. */
+  const onThemeChange = (theme: Theme) => {
+    globalThis.Theme.selectThemeIcon(theme);
+
+    const $ = document.documentElement;
+    const systemTheme = getPreferredColorScheme();
+
+    $.dataset.colorScheme = theme === "system" ? systemTheme : theme;
+    storeTheme(theme);
+  };
+
+  // React to changes in system color scheme.
+  mql.addEventListener("change", () => {
+    if (loadTheme() === "system") onThemeChange("system");
+  });
+
+  createElement(
+    "theme-picker",
+    class ThemePicker extends HTMLElement {
+      btn: HTMLButtonElement;
+      onClick: (e: PointerEvent) => void;
+      constructor() {
+        super();
+        this.btn = $("button", HTMLButtonElement, this);
+        this.onClick = this.#handleThemeChange.bind(this);
+      }
+
+      connectedCallback() {
+        onThemeChange(loadTheme());
+        this.btn.addEventListener("click", this.onClick);
+      }
+
+      #handleThemeChange(e: PointerEvent) {
+        if (e.currentTarget instanceof HTMLButtonElement) {
+          onThemeChange(parseTheme(themeGenerator.next().value));
+        }
+      }
+
+      disconnectedCallback() {
+        this.btn.removeEventListener("click", this.onClick);
+      }
+    },
+  );
+</script>

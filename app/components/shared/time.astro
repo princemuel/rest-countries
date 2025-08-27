@@ -1,0 +1,17 @@
+---
+import { Temporal } from "@js-temporal/polyfill";
+
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"time">;
+
+const { datetime, ...attrs } = Astro.props;
+// Temporal.Now.zonedDateTimeISO().epochMilliseconds;
+const instant = Temporal.Instant.from(datetime || Temporal.Now.instant());
+
+const zonedDateTime = instant.toZonedDateTimeISO(Temporal.Now.timeZoneId());
+---
+
+<time datetime={instant.toString()} {...attrs}>
+  <slot>{zonedDateTime.toPlainDate().toString()}</slot>
+</time>

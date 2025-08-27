@@ -1,0 +1,42 @@
+---
+import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
+
+import "@/global.css";
+
+import Header from "@/components/layout/header.astro";
+import ThemeProvider from "@/components/widgets/theme-provider.astro";
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html
+  lang="en"
+  class:list={["scheme-light dark:scheme-dark", "motion-safe:scroll-smooth"]}
+  data-color-scheme="light"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title || "Countries in the World"}</title>
+    <Font cssVariable="--font-family-sans" preload />
+    <ClientRouter />
+    <ThemeProvider />
+  </head>
+  <body
+    class:list={[
+      "relative flex min-h-svh flex-col",
+      "font-sans text-base font-normal antialiased",
+      "bg-grey-100 text-grey-300 dark:bg-grey-400 dark:text-white",
+      // "transition-colors duration-300 ease-in",
+    ]}
+  >
+    <Header />
+    <main aria-labelledby="aria-headline" class="my-12">
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+---
+import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+
+import Fence from "@/components/layout/fence.astro";
+import Shell from "@/components/layout/shell.astro";
+import Link from "@/components/link.astro";
+import { normalize } from "@/utils/strings";
+
+const countries = await getCollection("countries");
+---
+
+<Shell>
+  <Fence>
+    <section
+      class=""
+      aria-labelledby="aria-country-list-h"
+      class:list={[
+        "3xl:grid-cols-5 mx-auto grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+      ]}
+    >
+      <h2 id="aria-country-list-h" class="sr-only">List of Countries</h2>
+
+      {
+        countries.map(async (country) => {
+          const c = country.data;
+
+          return (
+            <article
+              aria-labelledby={`aria-${normalize(c.name.common.toLocaleLowerCase())}`}
+              class:list={[
+                "flex h-full flex-col overflow-hidden rounded-lg shadow-md",
+                "dark:bg-grey-500 bg-white",
+              ]}
+            >
+              <figure class="h-48 w-full overflow-hidden">
+                <Picture
+                  src={c.flag.url.svg}
+                  alt={c.flag.alt}
+                  width="267"
+                  height="160"
+                  formats={["avif", "webp"]}
+                  fallbackFormat="svg"
+                  class="h-full w-full object-cover"
+                />
+                <figcaption class="sr-only">{c.flag.alt}</figcaption>
+              </figure>
+
+              <section class="flex flex-col items-start gap-4 p-4 sm:p-6">
+                <h3
+                  id={`aria-${normalize(c.name.common.toLocaleLowerCase())}`}
+                  class="text-lg font-extrabold"
+                >
+                  <Link href={`/wiki/${encodeURI(c.name.common)}`}>
+                    {c.name.common}
+                  </Link>
+                </h3>
+
+                <dl
+                  class="flex flex-grow flex-col gap-2"
+                  aria-label={`Key information about ${c.name.common}`}
+                >
+                  <div class="grid grid-cols-[10ch_auto]">
+                    <dt class="font-semibold after:content-[':']">Capital</dt>
+                    <dd class="font-light">{c.capital.names[0] || "None"}</dd>
+                  </div>
+
+                  <div class="grid grid-cols-[10ch_auto]">
+                    <dt class="font-semibold after:content-[':']">Region</dt>
+                    <dd class="font-light">{c.location.region}</dd>
+                  </div>
+
+                  <div class="grid grid-cols-[10ch_auto]">
+                    <dt class="font-semibold after:content-[':']">Domain</dt>
+                    <dd class="font-light">{c.tld}</dd>
+                  </div>
+
+                  <div class="grid grid-cols-[10ch_auto]">
+                    <dt class="font-semibold after:content-[':']">Population</dt>
+                    <dd class="font-light">
+                      {c.population.toLocaleString("en-US")}
+                    </dd>
+                  </div>
+                </dl>
+              </section>
+            </article>
+          );
+        })
+      }
+    </section>
+  </Fence>
+</Shell>

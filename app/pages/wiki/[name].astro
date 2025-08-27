@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+
+import Shell from "@/components/layout/shell.astro";
+
+import type { InferGetStaticPropsType } from "astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("countries");
+
+  return entries.map((entry) => ({
+    props: { entry },
+    params: { name: decodeURI(entry.data.name.common) },
+  }));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry } = Astro.props;
+---
+
+<Shell>
+  <h1>{entry.data.name.common}</h1>
+</Shell>

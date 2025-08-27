@@ -1,0 +1,15 @@
+---
+import Fence from "@/components/layout/fence.astro";
+import ThemePicker from "@/components/widgets/theme-picker.astro";
+---
+
+<header class="dark:bg-grey-500 sticky top-0 z-50 bg-white shadow-md">
+  <Fence>
+    <div class="flex items-center justify-between py-6">
+      <h1 class="text-base font-extrabold md:text-xl">Where in the world?</h1>
+      <div class="">
+        <ThemePicker />
+      </div>
+    </div>
+  </Fence>
+</header>

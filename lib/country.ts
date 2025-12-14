@@ -3,19 +3,17 @@ import { cache } from "react";
 import "server-only";
 
 export const preloadCountry = (slug = "") => {
-  void getCountryBySlug(slug);
+  void getBySlug(slug);
 };
 
-export const getCountryBySlug = cache(
-  async (slug = ""): Promise<CountryType[]> => {
-    try {
-      const response = await fetch(`${REST_COUNTRIES_API}/alpha/${slug}`);
+export const getBySlug = cache(async (slug = ""): Promise<CountryType[]> => {
+  try {
+    const response = await fetch(`${REST_COUNTRIES_API}/alpha/${slug}`);
 
-      return response.json();
-    } catch (error) {
-      console.log("[getCountryBySlug]", error);
+    return response.json();
+  } catch (error) {
+    console.log("[getBySlug]", error);
 
-      return [];
-    }
-  },
-);
+    return [];
+  }
+});

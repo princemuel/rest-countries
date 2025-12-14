@@ -1,7 +1,7 @@
 import { hasValues } from "@/helpers";
-import { getCountryBySlug, toBase64 } from "@/lib";
+import { getBySlug, toBase64 } from "@/lib";
 import NextImage from "next/image";
-import NextLink from "next/link";
+import Link from "next/link";
 import { Suspense } from "react";
 import { CountryMap } from "../molecules";
 
@@ -14,14 +14,14 @@ interface Props {
 }
 
 export const CountryDetails = async ({ slug }: Props) => {
-  const response = (await getCountryBySlug(slug)) || [];
+  const response = (await getBySlug(slug)) || [];
   const country = response[0];
   const blurDataUrl = await toBase64(country?.flags?.svg);
 
   const borders = await Promise.all(
     (country?.borders ?? []).map(async (border) => {
       try {
-        const response = await getCountryBySlug(border);
+        const response = await getBySlug(border);
         return response[0];
       } catch (error) {
         console.log(error);
@@ -163,12 +163,12 @@ export const CountryDetails = async ({ slug }: Props) => {
                           key={border?.cca3}
                           className="flex-1 rounded-sm text-center shadow-pill"
                         >
-                          <NextLink
+                          <Link
                             href={`/countries/${border?.cca3}`}
                             className="inline-flex items-center justify-center px-4 py-1 text-sm font-light capitalize"
                           >
                             {border?.name?.common}
-                          </NextLink>
+                          </Link>
                         </dd>
                       );
                     })

@@ -1,5 +1,5 @@
 import NextImage from "next/image";
-import NextLink from "next/link";
+import Link from "next/link";
 
 interface Props {
   country: CountryType;
@@ -10,9 +10,9 @@ export const CountryCard = ({ country, flag }: Props) => {
   return (
     <article
       key={country?.name?.common}
-      className="w-full max-w-xs overflow-hidden rounded-md bg-white shadow-card transition-colors duration-500 ease-in dark:bg-brand-500"
+      className="w-full overflow-hidden rounded-md bg-white shadow-card transition-colors duration-500 ease-in dark:bg-brand-500"
     >
-      <NextLink href={`/countries/${country?.cca3}`} className="block">
+      <Link href={`/countries/${country?.cca3}`} className="block">
         <NextImage
           src={flag?.url || country?.flag}
           alt={flag?.alt || ""}
@@ -54,7 +54,7 @@ export const CountryCard = ({ country, flag }: Props) => {
             </dl>
           </div>
         </div>
-      </NextLink>
+      </Link>
     </article>
   );
 };

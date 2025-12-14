@@ -7,7 +7,7 @@ import {
 } from "@/lib";
 import HomepageTemplate from "./home";
 
-async function PageRoute() {
+export default async function Page() {
   preloadCountries();
 
   const imageResponse = await getAllCountries();
@@ -28,5 +28,3 @@ async function PageRoute() {
     </CountriesProvider>
   );
 }
-
-export default PageRoute;

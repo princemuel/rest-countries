@@ -2,31 +2,29 @@ import { defineMeta } from "@/config";
 import { hasValues } from "@/helpers";
 import {
   getAllCountries,
-  getCountryBySlug,
+  getBySlug,
   preloadBase64,
   preloadCountry,
 } from "@/lib";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import CountryDetailsTemplate from "./country";
+import Template from "./country";
 
 interface Props {
   params: IParams;
 }
 
-async function PageRoute({ params: { slug } }: Props) {
+export default async function Page({ params: { slug } }: Props) {
   preloadCountry(slug);
 
-  const imageResponse = await getCountryBySlug(slug);
+  const imageResponse = await getBySlug(slug);
 
   if (!imageResponse || !hasValues(imageResponse)) throw notFound();
 
   preloadBase64(imageResponse[0]?.flags?.svg);
 
-  return <CountryDetailsTemplate slug={slug} />;
+  return <Template slug={slug} />;
 }
-
-export default PageRoute;
 
 export async function generateStaticParams() {
   const countries = await getAllCountries();
@@ -37,7 +35,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params: { slug },
 }: Props): Promise<Metadata> {
-  const response = await getCountryBySlug(slug);
+  const response = await getBySlug(slug);
 
   const country = response[0];
   if (!country) throw notFound();

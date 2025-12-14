@@ -7,7 +7,7 @@
   "author": "princemuel <vansomecsam@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "rm -rvf .next && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint:fix": "next lint --fix",
@@ -15,11 +15,6 @@
     "type-check": "tsc --noEmit",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache"
-  },
-  "engines": {
-    "npm": "please-use-pnpm",
-    "yarn": "please-use-pnpm",
-    "pnpm": "8.x"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",

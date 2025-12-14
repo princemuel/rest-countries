@@ -9,9 +9,7 @@ interface Props extends ReactLeaflet.MapContainerProps {
   children: (value: typeof ReactLeaflet) => React.ReactNode;
   location: [number, number];
 }
-const DynamicMap = dynamic(() => import("../atoms/base-map"), {
-  ssr: false,
-});
+const DynamicMap = dynamic(() => import("../atoms/base-map"), {});
 
 const Map = ({
   location,

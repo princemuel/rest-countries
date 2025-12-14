@@ -1,20 +1,13 @@
 "use client";
 
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ThemeProvider } from "next-themes";
 
-interface Props {
-  children: React.ReactNode;
-}
+type Props = React.ComponentProps<"div">;
 
 export function Providers({ children }: Props) {
   return (
-    <NextThemesProvider
-      attribute="data-darkreader-theme"
-      storageKey="rc-theme"
-      defaultTheme="system"
-      enableSystem={true}
-    >
+    <ThemeProvider attribute="class" storageKey="rc-theme" enableSystem={true}>
       {children}
-    </NextThemesProvider>
+    </ThemeProvider>
   );
 }

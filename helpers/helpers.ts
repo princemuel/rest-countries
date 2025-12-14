@@ -1,11 +1,7 @@
-import { cx } from "cva";
-import type { ClassValue } from "cva/types";
-import { extendTailwindMerge } from "tailwind-merge";
-
-const customTwMerge = extendTailwindMerge({});
+import { ClassValue, cnMerge } from "tailwind-variants";
 
 export function tw(...args: ClassValue[]) {
-  return customTwMerge(cx(args));
+  return cnMerge(...args)({ twMerge: false });
 }
 
 /*---------------------------------*

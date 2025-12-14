@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "flagcdn.com",
-        pathname: "**",
+        pathname: "w*/**", // allow /w320/... or other sizes
       },
       {
         protocol: "https",
@@ -25,10 +25,10 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "mainfacts.com",
-        pathname: "**",
+        pathname: "media/images/coats_of_arms/*", // allow coat of arms images
       },
     ],
   },
 };
 
-export default withPlaiceholder(nextConfig);
+export default nextConfig;

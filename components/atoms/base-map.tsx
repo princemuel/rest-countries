@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 import * as ReactLeaflet from "react-leaflet";
 
-const { MapContainer } = ReactLeaflet;
+import { MapContainer } from "react-leaflet";
 
 // @ts-expect-error
 interface Props extends ReactLeaflet.MapContainerProps {
